@@ -99,6 +99,15 @@ public class WebController {
 		return user;
 	}
 
+	@RequestMapping(value = "/cs480/smellCheck", method = RequestMethod.GET)
+	String smellCheck() {
+		// You can replace this with other string,
+		// and run the application locally to check your changes
+		// with the URL: http://localhost:8080/
+		return "Needs a Bath";
+	}
+	
+	
 	/**
 	 * This API deletes the user. It uses HTTP DELETE method.
 	 *
