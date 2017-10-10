@@ -106,6 +106,11 @@ public class WebController {
 		// with the URL: http://localhost:8080/
 		return "Needs a Bath";
 	}
+	//david's implementation
+	@RequestMapping(value = "/cs480/error404", method = RequestMethod.GET)
+	String error404() {
+			return "Error 404: Page not found";
+	}
 	
 	
 	/**
