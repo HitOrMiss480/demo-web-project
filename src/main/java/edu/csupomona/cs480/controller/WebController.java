@@ -111,7 +111,11 @@ public class WebController {
 	String error404() {
 			return "Error 404: Page not found";
 	}
-	
+
+	@RequestMapping(value = "/cs480/hello", method = RequestMethod.GET)
+	String hello() {
+		return "Hello World";
+	}	
 	
 	/**
 	 * This API deletes the user. It uses HTTP DELETE method.
