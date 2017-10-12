@@ -1,5 +1,6 @@
 package edu.csupomona.cs480.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.csupomona.cs480.App;
 import edu.csupomona.cs480.data.User;
 import edu.csupomona.cs480.data.provider.UserManager;
-
+import org.jsoup.*;
+import org.jsoup.nodes.*;
+import org.jsoup.select.*;
 
 /**
  * This is the controller used by Spring framework.
@@ -37,6 +40,20 @@ public class WebController {
 	@Autowired
 	private UserManager userManager;
 
+	@RequestMapping(value = "/cs480/abcdefg", method = RequestMethod.GET)
+	String abcdefg() throws IOException {
+		// You can replace this with other string,
+		// and run the application locally to check your changes
+		// with the URL: http://localhost:8080/
+		Document doc;
+		doc = Jsoup.connect("http://google.com").get();
+		Elements links = doc.getElementsByTag("a");
+		Element a = links.first();
+		return links.html();
+		
+	}
+	
+	
 	/**
 	 * This is a simple example of how the HTTP API works.
 	 * It returns a String "OK" in the HTTP response.
