@@ -3,6 +3,15 @@ package edu.csupomona.cs480.controller;
 import java.io.IOException;
 import java.util.List;
 
+import com.google.common.base.Splitter;
+import org.apache.commons.math3.random.GaussianRandomGenerator;
+import org.apache.commons.math3.random.JDKRandomGenerator;
+import org.apache.commons.math3.random.RandomGenerator;
+import org.apache.commons.math3.random.UncorrelatedRandomVectorGenerator;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,15 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.csupomona.cs480.App;
 import edu.csupomona.cs480.data.User;
 import edu.csupomona.cs480.data.provider.UserManager;
-
-import org.apache.commons.math3.random.GaussianRandomGenerator;
-import org.apache.commons.math3.random.JDKRandomGenerator;
-import org.apache.commons.math3.random.NormalizedRandomGenerator;
-import org.apache.commons.math3.random.RandomGenerator;
-import org.apache.commons.math3.random.UncorrelatedRandomVectorGenerator;
-import org.jsoup.*;
-import org.jsoup.nodes.*;
-import org.jsoup.select.*;
 
 /**
  * This is the controller used by Spring framework.
@@ -75,6 +75,18 @@ public class WebController {
 		return out;
 	}
 		
+
+	@RequestMapping(value = "/cs480/dcba", method = RequestMethod.GET)
+	String dcba() {
+		String str = "a,,b,     c,,,d";
+ 
+		Iterable<String> result = Splitter.on(',')
+			       .split(str);
+ 
+		for(String s: result){
+			return s;
+		}
+	}	
 	
 	
 	/**
