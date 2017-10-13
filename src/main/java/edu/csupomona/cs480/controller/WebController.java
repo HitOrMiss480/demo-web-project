@@ -14,6 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.csupomona.cs480.App;
 import edu.csupomona.cs480.data.User;
 import edu.csupomona.cs480.data.provider.UserManager;
+
+import org.apache.commons.math3.random.GaussianRandomGenerator;
+import org.apache.commons.math3.random.JDKRandomGenerator;
+import org.apache.commons.math3.random.NormalizedRandomGenerator;
+import org.apache.commons.math3.random.RandomGenerator;
+import org.apache.commons.math3.random.UncorrelatedRandomVectorGenerator;
 import org.jsoup.*;
 import org.jsoup.nodes.*;
 import org.jsoup.select.*;
@@ -52,6 +58,23 @@ public class WebController {
 		return links.html();
 		
 	}
+	
+	
+	@RequestMapping(value = "/cs480/stats", method = RequestMethod.GET)
+	String stats() {
+		RandomGenerator rg = new JDKRandomGenerator();
+		GaussianRandomGenerator rawGenerator=new GaussianRandomGenerator(rg);
+		
+		UncorrelatedRandomVectorGenerator rand = new UncorrelatedRandomVectorGenerator(5, rawGenerator );
+		double []temp = rand.nextVector();
+		String out = "";
+		for(int i = 0; i < temp.length; i++)
+		{
+			out = out + " " + temp[i];
+		}
+		return out;
+	}
+		
 	
 	
 	/**
