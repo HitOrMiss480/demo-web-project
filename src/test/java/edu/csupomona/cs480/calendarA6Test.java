@@ -37,8 +37,8 @@ public class calendarA6Test {
 	
 	@Test
 	public void testNotFound() {
-		calendarA6 cal = null;
-		assertEquals(cal,null);		
+		calendarA6 cal = new calendarA6();
+		assertEquals(cal.Empty(),true);		
 	}
 
 }

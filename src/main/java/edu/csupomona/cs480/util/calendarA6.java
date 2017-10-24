@@ -24,6 +24,12 @@ public class calendarA6 {
 	public int product (int a, int b) {
 		return a * b;
 	}
+	public boolean Empty() {
+		if(date=="") {
+			return true;
+		}
+		return false;
+	}
 	
 
 }
