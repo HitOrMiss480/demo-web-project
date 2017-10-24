@@ -12,13 +12,19 @@ import org.junit.Test;
 public class calendarA6Test {
 
 	@Test
-	public void test1()
+	public void testEventDate()
 	{
 		String result = "";
 		calendarA6 cal = new calendarA6();
 		
 		result = cal.EventDate("Career Fair", "10/27/2017");
 		assertEquals("Career Fair is scheduled to be on 10/27/2017", result);
+	}
+	
+	@Test
+	public void testEndDate() {
+		calendarA6 cal = new calendarA6();
+		assertEquals(false, cal.endDate(10232017, 10242017));
 	}
 
 }

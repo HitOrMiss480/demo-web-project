@@ -17,7 +17,9 @@ public class calendarA6 {
 		return temp;
 	}
 	
-	
+	public boolean endDate(int dateToCheck, int dateInData) {
+		return dateToCheck == dateInData;
+	}
 	
 	
 
