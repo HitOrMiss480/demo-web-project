@@ -7,6 +7,7 @@ import java.io.IOException;
 import edu.csupomona.cs480.util.calendarA6;
 import junit.framework.Assert;
 
+
 import org.junit.Test;
 
 public class calendarA6Test {
@@ -25,6 +26,13 @@ public class calendarA6Test {
 	public void testEndDate() {
 		calendarA6 cal = new calendarA6();
 		assertEquals(false, cal.endDate(10232017, 10242017));
+	}
+	
+	@Test
+	public void testProduct() {
+		calendarA6 cal = new calendarA6();
+		int prod = cal.product(3, 5);
+		assertEquals(15, prod);
 	}
 
 }

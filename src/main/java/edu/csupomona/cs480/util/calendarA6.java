@@ -21,6 +21,9 @@ public class calendarA6 {
 		return dateToCheck == dateInData;
 	}
 	
+	public int product (int a, int b) {
+		return a * b;
+	}
 	
 
 }
