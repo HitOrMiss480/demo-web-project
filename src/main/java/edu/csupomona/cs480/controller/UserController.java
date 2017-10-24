@@ -33,12 +33,12 @@ public class UserController<T> {
 	@Autowired
 	private UserManager userManager;
 	
-	@RequestMapping(value = "user/{userId}",method = RequestMethod.GET,produces = "application/json")
+	@RequestMapping(value = "/user/{userId}",method = RequestMethod.GET,produces = "application/json")
 	ResponseEntity<?> getUser(@PathVariable("userId") String userId) {
 		try {
 			User user = userManager.getUser(userId);
 			
-			ArrayList<ErrorPackage> errors = checkUser(user);
+			ArrayList<ErrorPackage> errors = validateUser(user);
 			if(!errors.isEmpty()) {
 				return new ResponseEntity<>("!!!!add json string here!!!!!",HttpStatus.NOT_FOUND);
 			}
@@ -50,13 +50,43 @@ public class UserController<T> {
 		return new ResponseEntity<>("!!!!add json string here!!!!!",HttpStatus.OK);
 	}
 	
-	// add post
+	@RequestMapping(value = "/user/", method = RequestMethod.POST, produces = "application/json")
+	ResponseEntity<?> createUser(){
+		try {
+			// add post code
+		}
+		catch(Exception e) {
+			// !!!!! Set up error handler here!!!!
+			return new ResponseEntity<>("!!!!add json string here!!!!!",HttpStatus.BAD_REQUEST);		
+		}
+		return new ResponseEntity<>("!!!!add json string here!!!!!", HttpStatus.OK);
+	}
 	
-	// add put
+	@RequestMapping(value = "/user/{userId}", method = RequestMethod.PUT, produces = "application/json")
+	ResponseEntity<?> editUser(@PathVariable("userId") String userId){
+		try {
+			// add put code
+		}
+		catch(Exception e) {
+			// !!!!! Set up error handler here!!!!
+			return new ResponseEntity<>("!!!!add json string here!!!!!",HttpStatus.BAD_REQUEST);		
+		}
+		return new ResponseEntity<>("!!!!add json string here!!!!!", HttpStatus.OK);
+	}
 	
-	// add delete
+	@RequestMapping(value = "/user/{userId}", method = RequestMethod.DELETE, produces = "application/json")
+	ResponseEntity<?> deleteUser(@PathVariable("userId") String userId){
+		try {
+			// add delete code
+		}
+		catch(Exception e) {
+			// !!!!! Set up error handler here!!!!
+			return new ResponseEntity<>("!!!!add json string here!!!!!",HttpStatus.BAD_REQUEST);		
+		}
+		return new ResponseEntity<>("!!!!add json string here!!!!!", HttpStatus.OK);
+	}
 	
-	private ArrayList<ErrorPackage> checkUser(User user){
+	private ArrayList<ErrorPackage> validateUser(User user){
 		ArrayList<ErrorPackage> errors = new ArrayList<ErrorPackage>();
 		ErrorPackage error;
 		if(user == null) {
