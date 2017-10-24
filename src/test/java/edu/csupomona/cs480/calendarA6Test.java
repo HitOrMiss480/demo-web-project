@@ -34,6 +34,12 @@ public class calendarA6Test {
 		int prod = cal.product(3, 5);
 		assertEquals(15, prod);
 	}
+	
+	@Test
+	public void testNotFound() {
+		calendarA6 cal = null;
+		assertEquals(cal,null);		
+	}
 
 }
 
