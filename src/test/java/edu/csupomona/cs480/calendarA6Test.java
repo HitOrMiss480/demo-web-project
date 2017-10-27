@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import edu.csupomona.cs480.util.calendarA6;
 import junit.framework.Assert;
 
@@ -39,8 +42,23 @@ public class calendarA6Test {
 	public void testNotFound() {
 		calendarA6 cal = new calendarA6();
 		assertEquals(cal.Empty(),true);		
+	
 	}
+	
+	@Test 
+	public void testCurrentDate() {
+		calendarA6 cal = new calendarA6();
+		 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+	     Date date = new Date();
+	     String dt= dateFormat.format(date);
+	     assertEquals(dt,cal.currentDate());
 
+	}
+	    
+	}
+			
+	
+    
 }
 
 

@@ -30,6 +30,11 @@ public class calendarA6 {
 		}
 		return false;
 	}
+
+	public Object currentDate() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }
