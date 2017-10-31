@@ -1,6 +1,6 @@
 create database cs_480_hom;
 
-use CS_480_HOM;
+use cs_480_hom;
 
 CREATE TABLE IF NOT EXISTS `User`
 (
