@@ -1,7 +1,10 @@
 Overview
 --------
 
-The skeleton of the demo web project for CS480.
+The skeleton of the demo web project for CS480 has been modified for team HitorMiss
+
+Project has been deployed to AWS cloud server and is currently running on this URL:
+http://ec2-52-53-166-213.us-west-1.compute.amazonaws.com/
 
 This project is designed to let you practice the different aspects of software engineering, such as version control, design, tests, build, deployment, and maintenance.
 
