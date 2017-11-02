@@ -145,7 +145,6 @@ public class WebController {
 			@RequestParam(value = "major", required = false) String major) {
 		User user = new User();
 		user.setId(id);
-		user.setMajor(major);
 		user.setName(name);
 		userManager.updateUser(user);
 		return user;

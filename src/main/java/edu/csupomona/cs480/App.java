@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
+import edu.cspomona.cs480.DAL.DataAccess;
 import edu.csupomona.cs480.data.provider.FSUserManager;
 import edu.csupomona.cs480.data.provider.UserManager;
 
@@ -24,6 +25,12 @@ public class App {
     public UserManager userManager() {
         UserManager userManager = new FSUserManager();
         return userManager;
+    }
+    
+    @Bean
+    public DataAccess dataServices() {
+    	DataAccess d = new DataAccess();
+    	return d;
     }
 
     /**

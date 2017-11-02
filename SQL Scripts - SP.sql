@@ -1,37 +1,39 @@
 use cs_480_hom;
 -- USER STORED PROCEDURES
 DELIMITER //
-CREATE PROCEDURE GetUser(un varchar(256))
+CREATE PROCEDURE GetUser(uID varchar(256))
 BEGIN
-	SELECT @UserId := UserId 
+    SELECT UserId, UserName, `Name`
     FROM User
-    WHERE Username = un;
+    Where UserId = uID;
     
-    SELECT e.EventId,e.EventName,e.Org,e.Date,e.IsPublic
-    FROM userevent AS ue JOIN `event` AS e
-    ON ue.EventId = e.EventId
-    WHERE ue.UserId = @UserId;
+    SELECT e.EventId,e.EventName, e.IsPublic, e.Org, e.Planner, e.Date
+    FROM `Event` AS e
+    JOIN `UserEvent` AS ue
+    ON e.EventId = ue.EventId
+    WHERE ue.UserId = uID;
     
-    SELECT o.OrgId, o.OrgName, o.Head
-    FROM userorg as uo JOIN `organization` AS o
-    ON uo.OrgId = o.OrgId
-    WHERE uo.UserId = @UserId;
+    SELECT *
+    FROM `Organization` as o
+    JOIN `UserOrg` AS uo
+    ON o.OrgId = uo.OrgId
+    WHERE uo.UserId = uID;
 END//
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE CreateUser(uID varchar(256),un varchar(256))
+CREATE PROCEDURE CreateUser(uID varchar(256),n varchar(256), un varchar(256))
 BEGIN
-	INSERT INTO `user`(userid,username) 
-    VALUES 			  (   uID,      un);
+	INSERT INTO `User`(UserId,`Name`,UserName) 
+    VALUES 			  (   uID,     n,      un);
 END//
 DELIMITER ;
 
 DELIMITER //
-CREATE PROCEDURE AlterUser(uID varchar(256),un varchar(256))
+CREATE PROCEDURE AlterUser(uID varchar(256),n varchar(256),un varchar(256))
 BEGIN
 	UPDATE `user`
-    SET UserName = un
+    SET UserName = un,`Name` = n
     WHERE UserId = uID;
 END//
 DELIMITER ;
@@ -85,14 +87,14 @@ DELIMITER //
 CREATE PROCEDURE GetOrgs()
 BEGIN
 	SELECT OrgId,OrgName,Head
-    FROM organization;
+    FROM Organization;
 END//
 DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE CreateOrg(oID varchar(256), `on` varchar(256), h varchar(256))
 BEGIN 
-	INSERT INTO `organization` (OrgId, OrgName, Head)
+	INSERT INTO `Organization` (OrgId, OrgName, Head)
     VALUES 					   (  oID,    `on`,    h);
 END//
 DELIMITER ;
@@ -100,8 +102,8 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE AlterOrg(oID varchar(256), `on` varchar(256), h varchar(256))
 BEGIN
-	UPDATE `organization`
-    SET OrgName = `on`, Head = h;
+	UPDATE `Organization`
+    SET OrgName = `on`, Head = h
     WHERE OrgId = oID;
 END//
 DELIMITER ;
@@ -109,7 +111,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE DeleteOrg(oID varchar(256))
 BEGIN
-	DELETE FROM `organization`
+	DELETE FROM `Organization`
     WHERE OrgId = oID;
 END//
 DELIMITER ;

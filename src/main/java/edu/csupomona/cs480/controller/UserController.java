@@ -30,6 +30,7 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.csupomona.cs480.App;
 import edu.csupomona.cs480.data.User;
 import edu.csupomona.cs480.data.provider.UserManager;
+import edu.cspomona.cs480.DAL.DataAccess;
 import edu.cspomona.cs480.constants.*;
 
 @RestController
@@ -37,7 +38,7 @@ public class UserController<T> {
 	public Gson gson = new GsonBuilder().create();
 	
 	@Autowired
-	private UserManager userManager;
+	private DataAccess userManager;
 	
 	@RequestMapping(value = "/user/{userId}",method = RequestMethod.GET,produces = "application/json")
 	ResponseEntity<?> getUser(@PathVariable("userId") String userId) {
@@ -65,7 +66,13 @@ public class UserController<T> {
 				return new ResponseEntity<>(gson.toJson(errors),HttpStatus.BAD_REQUEST);
 			}
 			// database service call here
-			
+			user.setId(UUID.randomUUID().toString());
+			user = userManager.createUser(user);
+			// failed creation
+			if(user == null) {
+				return new ResponseEntity<>(gson.toJson(new ErrorPackage(HttpStatus.BAD_REQUEST.value(), Constants.FailedCreateUser)),HttpStatus.CREATED);
+			}
+				
 			return new ResponseEntity<>(gson.toJson(user),HttpStatus.CREATED);
 		}
 		catch(Exception e) {
