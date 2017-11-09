@@ -83,6 +83,14 @@
 	  <artifactId>google-api-services-appsactivity</artifactId>
 	  <version>v1-rev46-1.23.0</version>
 	</dependency>
+
+	<!-- https://mvnrepository.com/artifact/com.google.api-client/google-api-client-assembly -->
+	<dependency>
+	  <groupId>com.google.api-client</groupId>
+	  <artifactId>google-api-client-assembly</artifactId>
+	  <version>1.23.0</version>
+	  <type>pom</type>
+	</dependency>
 	
 	<dependency>
 		<groupId>junit</groupId>
