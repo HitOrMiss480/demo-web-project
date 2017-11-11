@@ -59,7 +59,11 @@
 		  <artifactId>mysql-connector-java</artifactId>
 		  <version>6.0.6</version>
 		</dependency>
-		
+		<!-- allows for clickable buttons in html pages -->
+		<dependency>
+		  <groupId>org.springframework.boot</groupId>
+		  <artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 		
         <dependency>
             <!-- jsoup HTML parser library @ https://jsoup.org/ -->
