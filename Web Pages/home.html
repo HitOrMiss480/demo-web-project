@@ -5,11 +5,13 @@
   <title>CPP Calendar</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="google-signin-client_id" content="567625698601-1tm35nqtjfp2hn2mpav51po9kl9loq90.apps.googleusercontent.com">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
   <style>
   body {
       font: 400 15px/1.8 Lato, sans-serif;
@@ -176,49 +178,7 @@
   </div>
 </nav>
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    <!-- Indicators -->
-    <ol class="carousel-indicators">
-      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-      <li data-target="#myCarousel" data-slide-to="1"></li>
-      <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
 
-    <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox">
-      <div class="item active">
-        <img src="image/Tileable.png" alt="Tileable" width="1200" height="700">
-        <div class="carousel-caption">
-          <h3>Title</h3>
-          <p>Description</p>
-        </div>      
-      </div>
-
-      <div class="item">
-        <img src="image/important-dates.png" alt="Dates" width="1200" height="700">
-        <div class="carousel-caption">
-  
-        </div>      
-      </div>
-    
-      <div class="item">
-        <img src="image/css-club.png" alt="CSS" width="1200" height="700">
-        <div class="carousel-caption">
- 
-        </div>      
-      </div>
-    </div>
-
-    <!-- Left and right controls -->
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a>
-</div>
 
 <!-- Container (CALENDAR Section) -->
 <div id="calendar" class="bg-1 text-center">
@@ -226,10 +186,27 @@
     <h3 class="text-center">CALENDAR</h3>
     <p class="text-center">Description<br>Stuff</p>
 
-    <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=h20djm9o4relnj5t8cpii410uc%40group.calendar.google.com&amp;color=%23182C57&amp;src=en.usa%23holiday%40group.v.calendar.google.com&amp;color=%232F6309&amp;ctz=America%2FLos_Angeles" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
-
+    <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=tiiivp5ufbr50b77rvfqr50i0o%40group.calendar.google.com&amp;color=%23875509&amp;src=h20djm9o4relnj5t8cpii410uc%40group.calendar.google.com&amp;color=%23182C57&amp;src=en.usa%23holiday%40group.v.calendar.google.com&amp;color=%232F6309&amp;ctz=America%2FLos_Angeles" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
   </div>
 </div>
+
+
+
+<!-- Container (LOGIN Section) -->
+<!-- [START body] -->
+<body>
+  <script>
+    function onSuccess(googleUser) {
+      console.log('Signed in as: ' + googleUser.getBasicProfile().getName());
+    }
+  </script>
+  <div class="g-signin2" data-onsuccess="onSuccess"></div>
+</body>
+<!-- [END body] -->
+
+
+
+
 
 <!-- Container (ABOUT Section) -->
 <div id="about" class="container text-center">
