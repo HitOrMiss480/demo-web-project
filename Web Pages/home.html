@@ -1,161 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Theme Made By www.w3schools.com - No Copyright -->
-  <title>CPP Calendar</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="google-signin-client_id" content="567625698601-1tm35nqtjfp2hn2mpav51po9kl9loq90.apps.googleusercontent.com">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
-  <style>
-  body {
-      font: 400 15px/1.8 Lato, sans-serif;
-      color: #777;
-  }
-  h3, h4 {
-      margin: 10px 0 30px 0;
-      letter-spacing: 10px;      
-      font-size: 20px;
-      color: #111;
-  }
-  .container {
-      padding: 80px 120px;
-  }
-  .person {
-      border: 10px solid transparent;
-      margin-bottom: 25px;
-      width: 80%;
-      height: 80%;
-      opacity: 0.7;
-  }
-  .person:hover {
-      border-color: #f1f1f1;
-  }
-  .carousel-inner img {
-      -webkit-filter: grayscale(90%);
-      filter: grayscale(90%); /* make all photos black and white */ 
-      width: 100%; /* Set width to 100% */
-      margin: auto;
-  }
-  .carousel-caption h3 {
-      color: #fff !important;
-  }
-  @media (max-width: 600px) {
-    .carousel-caption {
-      display: none; /* Hide the carousel text when the screen is less than 600 pixels wide */
-    }
-  }
-  .bg-1 {
-      background: #2d2d30;
-      color: #bdbdbd;
-  }
-  .bg-1 h3 {color: #fff;}
-  .bg-1 p {font-style: italic;}
-  .list-group-item:first-child {
-      border-top-right-radius: 0;
-      border-top-left-radius: 0;
-  }
-  .list-group-item:last-child {
-      border-bottom-right-radius: 0;
-      border-bottom-left-radius: 0;
-  }
-  .thumbnail {
-      padding: 0 0 15px 0;
-      border: none;
-      border-radius: 0;
-  }
-  .thumbnail p {
-      margin-top: 15px;
-      color: #555;
-  }
-  .btn {
-      padding: 10px 20px;
-      background-color: #333;
-      color: #f1f1f1;
-      border-radius: 0;
-      transition: .2s;
-  }
-  .btn:hover, .btn:focus {
-      border: 1px solid #333;
-      background-color: #fff;
-      color: #000;
-  }
-  .modal-header, h4, .close {
-      background-color: #333;
-      color: #fff !important;
-      text-align: center;
-      font-size: 30px;
-  }
-  .modal-header, .modal-body {
-      padding: 40px 50px;
-  }
-  .nav-tabs li a {
-      color: #777;
-  }
-  #googleMap {
-      width: 100%;
-      height: 400px;
-      -webkit-filter: grayscale(100%);
-      filter: grayscale(100%);
-  }  
-  .navbar {
-      font-family: Montserrat, sans-serif;
-      margin-bottom: 0;
-      background-color: #2d2d30;
-      border: 0;
-      font-size: 11px !important;
-      letter-spacing: 4px;
-      opacity: 0.9;
-  }
-  .navbar li a, .navbar .navbar-brand { 
-      color: #d5d5d5 !important;
-  }
-  .navbar-nav li a:hover {
-      color: #fff !important;
-  }
-  .navbar-nav li.active a {
-      color: #fff !important;
-      background-color: #29292c !important;
-  }
-  .navbar-default .navbar-toggle {
-      border-color: transparent;
-  }
-  .open .dropdown-toggle {
-      color: #fff;
-      background-color: #555 !important;
-  }
-  .dropdown-menu li a {
-      color: #000 !important;
-  }
-  .dropdown-menu li a:hover {
-      background-color: red !important;
-  }
-  footer {
-      background-color: #2d2d30;
-      color: #f5f5f5;
-      padding: 32px;
-  }
-  footer a {
-      color: #f5f5f5;
-  }
-  footer a:hover {
-      color: #777;
-      text-decoration: none;
-  }  
-  .form-control {
-      border-radius: 0;
-  }
-  textarea {
-      resize: none;
-  }
+	  <!-- Theme Made By www.w3schools.com - No Copyright -->
+	  <title>CPP Calendar</title>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <meta name="google-signin-client_id" content="567625698601-1tm35nqtjfp2hn2mpav51po9kl9loq90.apps.googleusercontent.com">
+	  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+	  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	  <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+	  <style>
+	  body {
+	      font: 400 15px/1.8 Lato, sans-serif;
+	      color: #777;
+	  }
+	  h3, h4 {
+	      margin: 10px 0 30px 0;
+	      letter-spacing: 10px;      
+	      font-size: 20px;
+	      color: #111;
+	  }
+	  .container {
+	      padding: 80px 120px;
+	  }
+	  .person {
+	      border: 10px solid transparent;
+	      margin-bottom: 25px;
+	      width: 80%;
+	      height: 80%;
+	      opacity: 0.7;
+	  }
+	  .person:hover {
+	      border-color: #f1f1f1;
+	  }
+	  .carousel-inner img {
+	      -webkit-filter: grayscale(90%);
+	      filter: grayscale(90%); /* make all photos black and white */ 
+	      width: 100%; /* Set width to 100% */
+	      margin: auto;
+	  }
+	  .carousel-caption h3 {
+	      color: #fff !important;
+	  }
+	  @media (max-width: 600px) {
+	    .carousel-caption {
+	      display: none; /* Hide the carousel text when the screen is less than 600 pixels wide */
+	    }
+	  }
+	  .bg-1 {
+	      background: #2d2d30;
+	      color: #bdbdbd;
+	  }
+	  .bg-1 h3 {color: #fff;}
+	  .bg-1 p {font-style: italic;}
+	  .list-group-item:first-child {
+	      border-top-right-radius: 0;
+	      border-top-left-radius: 0;
+	  }
+	  .list-group-item:last-child {
+	      border-bottom-right-radius: 0;
+	      border-bottom-left-radius: 0;
+	  }
+	  .thumbnail {
+	      padding: 0 0 15px 0;
+	      border: none;
+	      border-radius: 0;
+	  }
+	  .thumbnail p {
+	      margin-top: 15px;
+	      color: #555;
+	  }
+	  .btn {
+	      padding: 10px 20px;
+	      background-color: #333;
+	      color: #f1f1f1;
+	      border-radius: 0;
+	      transition: .2s;
+	  }
+	  .btn:hover, .btn:focus {
+	      border: 1px solid #333;
+	      background-color: #fff;
+	      color: #000;
+	  }
+	  .modal-header, h4, .close {
+	      background-color: #333;
+	      color: #fff !important;
+	      text-align: center;
+	      font-size: 30px;
+	  }
+	  .modal-header, .modal-body {
+	      padding: 40px 50px;
+	  }
+	  .nav-tabs li a {
+	      color: #777;
+	  }
+	  .navbar {
+	      font-family: Montserrat, sans-serif;
+	      margin-bottom: 0;
+	      background-color: #2d2d30;
+	      border: 0;
+	      font-size: 11px !important;
+	      letter-spacing: 4px;
+	      opacity: 0.9;
+	  }
+	  .navbar li a, .navbar .navbar-brand { 
+	      color: #d5d5d5 !important;
+	  }
+	  .navbar-nav li a:hover {
+	      color: #fff !important;
+	  }
+	  .navbar-nav li.active a {
+	      color: #fff !important;
+	      background-color: #29292c !important;
+	  }
+	  .navbar-default .navbar-toggle {
+	      border-color: transparent;
+	  }
+	  .open .dropdown-toggle {
+	      color: #fff;
+	      background-color: #555 !important;
+	  }
+	  .dropdown-menu li a {
+	      color: #000 !important;
+	  }
+	  .dropdown-menu li a:hover {
+	      background-color: red !important;
+	  }
+	  footer {
+	      background-color: #2d2d30;
+	      color: #f5f5f5;
+	      padding: 32px;
+	  }
+	  footer a {
+	      color: #f5f5f5;
+	  }
+	  footer a:hover {
+	      color: #777;
+	      text-decoration: none;
+	  }  
+	  .form-control {
+	      border-radius: 0;
+	  }
+	  textarea {
+	      resize: none;
+	  }
+	  .form-signin
+	{
+	    max-width: 330px;
+	    padding: 15px;
+	    margin: 0 auto;
+	}
+	.form-signin .form-signin-heading, .form-signin .checkbox
+	{
+	    margin-bottom: 10px;
+	}
+	.form-signin .checkbox
+	{
+	    font-weight: normal;
+	}
+	.form-signin .form-control
+	{
+	    position: relative;
+	    font-size: 16px;
+	    height: auto;
+	    padding: 10px;
+	    -webkit-box-sizing: border-box;
+	    -moz-box-sizing: border-box;
+	    box-sizing: border-box;
+	}
+	.form-signin .form-control:focus
+	{
+	    z-index: 2;
+	}
+	.form-signin input[type="text"]
+	{
+	    margin-bottom: -1px;
+	    border-bottom-left-radius: 0;
+	    border-bottom-right-radius: 0;
+	}
+	.form-signin input[type="password"]
+	{
+	    margin-bottom: 10px;
+	    border-top-left-radius: 0;
+	    border-top-right-radius: 0;
+	}
+	.account-wall
+	{
+	    margin-top: 20px;
+	    padding: 40px 0px 20px 0px;
+	    background-color: #f7f7f7;
+	    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	}
+	.login-title
+	{
+	    color: #555;
+	    font-size: 18px;
+	    font-weight: 400;
+	    display: block;
+	}
+	.profile-img
+	{
+	    width: 96px;
+	    height: 96px;
+	    margin: 0 auto 10px;
+	    display: block;
+	    -moz-border-radius: 50%;
+	    -webkit-border-radius: 50%;
+	    border-radius: 50%;
+	}
+	.need-help
+	{
+	    margin-top: 10px;
+	}
+	.new-account
+	{
+	    display: block;
+	    margin-top: 10px;
+	}
   </style>
 </head>
-<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
+
+<body id="home" data-spy="scroll" data-target=".navbar" data-offset="50">
 
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
@@ -165,28 +236,67 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#myPage">CPP Calendar</a>
+      <a class="navbar-brand" href="#home">CPP Calendar</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#myPage">HOME</a></li>
-        <li><a href="#calendar">CALENDAR</a></li>
+        <li><a href="#login">LOG IN</a></li>
+        <li><a href="#add">ADD</a></li>
+        <li><a href="#events">EVENTS</a></li>
         <li><a href="#about">ABOUT</a></li>
-        <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
       </ul>
     </div>
   </div>
 </nav>
 
 
+<!-- Container (LOG IN Section) -->
+<div id="login" class="text-center">
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4">
+            <h1 class="text-center login-title">Log in to Google Calendar</h1>
+            <div class="account-wall">
+                <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                    alt="">
+                <form class="form-signin">
+                <input type="text" class="form-control" placeholder="Email" required autofocus>
+                <input type="password" class="form-control" placeholder="Password" required>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">
+                    Sign in</button>
+                <label class="checkbox pull-left">
+                    <input type="checkbox" value="remember-me">
+                    Remember me
+                </label>
+                <a href="#" class="pull-right need-help">Need help? </a><span class="clearfix"></span>
+                </form>
+            </div>
+            <a href="#" class="text-center new-account">Create an account </a>
+        </div>
+    </div>
+</div>
+</div>
 
-<!-- Container (CALENDAR Section) -->
-<div id="calendar" class="bg-1 text-center">
+
+<!-- Container (ADD Section) -->
+<div id="add" class="text-center">
   <div class="container">
-    <h3 class="text-center">CALENDAR</h3>
-    <p class="text-center">Description<br>Stuff</p>
+    <h3 class="text-center">ADD</h3>
+    <p class="text-center">[Checklist goes here]</p>
 
-    <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=tiiivp5ufbr50b77rvfqr50i0o%40group.calendar.google.com&amp;color=%23875509&amp;src=h20djm9o4relnj5t8cpii410uc%40group.calendar.google.com&amp;color=%23182C57&amp;src=en.usa%23holiday%40group.v.calendar.google.com&amp;color=%232F6309&amp;ctz=America%2FLos_Angeles" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+    
+  </div>
+</div>
+
+
+<!-- Container (EVENTS Section) -->
+<div id="events" class="bg-1 text-center">
+  <div class="container">
+    <h3 class="text-center">EVENTS</h3>
+
+    <iframe src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=tiiivp5ufbr50b77rvfqr50i0o%40group.calendar.google.com&amp;color=%23875509&amp;src=h20djm9o4relnj5t8cpii410uc%40group.calendar.google.com&amp;color=%23182C57&amp;src=en.usa%23holiday%40group.v.calendar.google.com&amp;color=%232F6309&amp;ctz=America%2FLos_Angeles" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no">
+    </iframe>
+
   </div>
 </div>
 
