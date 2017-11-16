@@ -77,7 +77,7 @@ public class OAuth2 extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 // Setting the filter for the URL "/google/login".
-                .addFilterAfter(filter(), BasicAuthenticationFilter.class)
+                .addFilterAt(filter(), BasicAuthenticationFilter.class)
                 .csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     }

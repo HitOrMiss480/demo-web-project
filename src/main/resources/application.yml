@@ -2,6 +2,18 @@
 spring:
   profiles:
     active: google
+  jpa:
+    database:
+        database: MYSQL
+        hibernate:
+          ddl-auto: validate
+# Database configuration
+  datasource:
+    platform: mysql
+    url: jdbc:mysql:http://homdevdb.cylr0zjow1ge.us-west-1.rds.amazonaws.com/
+    username: homdev
+    password: homdev480
+    driverClassName: com.mysql.jdbc.Driver 
 # Spring Security configuration
 security:
   oauth2:
@@ -20,4 +32,4 @@ security:
       preferTokenInfo: true
 # Server configuration
 server:
- port: 8181
+ port: 8080

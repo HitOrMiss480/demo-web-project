@@ -36,7 +36,6 @@ public class App {
         UserManager userManager = new FSUserManager();
         return userManager;
     }
-    @Bean
     
 
     /**
