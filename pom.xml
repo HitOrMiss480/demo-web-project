@@ -53,39 +53,12 @@
 	  <artifactId>mysql-connector-java</artifactId>
 	  <version>6.0.6</version>
 	</dependency>
-
-	<!-- allows for clickable buttons in html pages -->
-	<dependency>
-	  <groupId>org.springframework.boot</groupId>
-	  <artifactId>spring-boot-starter-thymeleaf</artifactId>
-	</dependency>
-		
-        <dependency>
-            <!-- jsoup HTML parser library @ https://jsoup.org/ -->
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
-            <version>1.10.3</version>
-        </dependency>
 	
 	<dependency>
 	  <!-- google calendar API from https://developers.google.com/api-client-library/java/apis/calendar/v3 -->
 	  <groupId>com.google.apis</groupId>
 	  <artifactId>google-api-services-calendar</artifactId>
 	  <version>v3-rev258-1.23.0</version>
-	</dependency>
-
-	<dependency>
-	  <!-- apache commons Math >> 3.6.1 -->
-	  <groupId>org.apache.commons</groupId>
-	  <artifactId>commons-math3</artifactId>
-	  <version>3.6.1</version>
-	</dependency>
-
-	<dependency>
-	  <!-- Google Guava -->
-  	  <groupId>com.google.guava</groupId>
-	  <artifactId>guava</artifactId>
- 	  <version>23.2-jre</version>
 	</dependency>
 
 	<!-- G suite activities API from google -->
