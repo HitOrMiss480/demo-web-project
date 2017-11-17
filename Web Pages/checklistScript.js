@@ -26,8 +26,7 @@ function makeCheckList(){
         HOWEVER, if this only can be loaded once this line can be removed
     */
     document.getElementById("checklist").innerHTML="";
-    
-    
+
     var parsedString = JSON.parse(jsonText);
     
     for(var i = 0; i< parsedString.name.length; i++){
@@ -55,7 +54,6 @@ function makeCheckList(){
         document.getElementById("checklist").innerHTML += "<br>";
     }
 }
-
 
 /*
     scans though the HTML document and collects data to send to the database in JSON format
@@ -88,4 +86,18 @@ function sendJSONStringToServer(){
         make sure to replace this with "return JSON.stringify(sendMe)" when we are on the step where we need to talk to the servers
     */
     window.alert(JSON.stringify(sendMe));
+}
+
+
+
+/*
+Combines all functions so that when submit button is pressed it does all the things it needs to do
+
+--NOTE--
+    -- the website needs to be changed to the landing page
+        -- currently google.com is placed as a placeholder
+*/
+function submitButtonPress(){
+    sendJSONStringToServer();
+    location.href = 'https://www.google.com';
 }
