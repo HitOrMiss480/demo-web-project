@@ -17,6 +17,7 @@ import com.google.api.services.appsactivity.model.ListActivitiesResponse;
 import com.google.api.services.appsactivity.model.Target;
 import com.google.api.services.appsactivity.model.User;
 
+import edu.cspomona.cs480.DAL.DataAccess;
 import edu.csupomona.cs480.data.provider.FSUserManager;
 import edu.csupomona.cs480.data.provider.UserManager;
 
@@ -37,6 +38,14 @@ public class App {
         return userManager;
     }
     
+<<<<<<< HEAD
+=======
+    @Bean
+    public DataAccess dataServices() {
+    	DataAccess d = new DataAccess();
+    	return d;
+    }
+>>>>>>> UserController
 
     /**
      * This is the running main method for the web application.

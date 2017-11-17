@@ -1,10 +1,11 @@
 create database cs_480_hom;
 
-use CS_480_HOM;
+use cs_480_hom;
 
 CREATE TABLE IF NOT EXISTS `User`
 (
-	`UserId` varchar (256) PRIMARY KEY,	
+	`UserId` varchar (256) PRIMARY KEY,
+	`Name` varchar(256) NOT NULL,
 	`UserName` varchar (256) NOT NULL,	
 	CONSTRAINT UC_UserName UNIQUE (`UserName`)
 );

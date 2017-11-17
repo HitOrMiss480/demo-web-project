@@ -1,5 +1,6 @@
 package edu.csupomona.cs480.data;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -13,10 +14,12 @@ public class User {
     /** The unique user Id */
     private String name;
     /** The unique user Id */
-    private String major;
-    /** The timestamp when the user is being created */
-    private String creationTime = new Date(System.currentTimeMillis()).toString();
+    private String userName;
 
+    private ArrayList<Events> UserEvents = new ArrayList<Events>();
+    
+    private ArrayList<Organizations> UserOrg = new ArrayList<Organizations>();
+    
     public String getId() {
         return id;
     }
@@ -33,19 +36,19 @@ public class User {
 		this.name = name;
 	}
 
-	public String getMajor() {
-		return major;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setMajor(String major) {
-		this.major = major;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-
-	public String getCreationTime() {
-		return creationTime;
+	
+	public void addEvent(Events e) {
+		this.UserEvents.add(e);
 	}
-
-	public void setCreationTime(String creationTime) {
-		this.creationTime = creationTime;
+	
+	public void addOrg(Organizations o) {
+		this.UserOrg.add(o);
 	}
 }
