@@ -38,14 +38,13 @@ public class App {
         return userManager;
     }
     
-<<<<<<< HEAD
-=======
+/** <<<<<<< HEAD ======= **/
     @Bean
     public DataAccess dataServices() {
     	DataAccess d = new DataAccess();
     	return d;
     }
->>>>>>> UserController
+/** >>>>>>> UserController **/
 
     /**
      * This is the running main method for the web application.
