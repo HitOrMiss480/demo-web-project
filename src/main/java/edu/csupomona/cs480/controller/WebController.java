@@ -49,6 +49,7 @@ public class WebController {
 	 */
 	@Autowired
 	private UserManager userManager;
+	
 /** Unusable temporarily. To fix, import jsoup and math commons library in pom.xml
 	@RequestMapping(value = "/cs480/abcdefg", method = RequestMethod.GET)
 	String abcdefg() throws IOException {
