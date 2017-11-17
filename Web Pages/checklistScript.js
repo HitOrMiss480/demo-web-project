@@ -16,7 +16,7 @@ Accepts a JSON string and turns that into a checklist that consists of clubs and
 function makeCheckList(){
     //------------edit when server connection is up-------------//
     //placeholder JSON string and object    
-    var jsonText = '{"name":["club","cal"], "check":[true, false]}';
+    var jsonText = '{"name":["club","cal","one","2","3","4","5","6","7","8","9","0"], "check":[true, false, false, false, false, false, false, false, false, false, false, false]}';
     //---------------------------------------------------------//
     
     
@@ -28,7 +28,11 @@ function makeCheckList(){
     document.getElementById("checklist").innerHTML="";
 
     var parsedString = JSON.parse(jsonText);
-    
+    var table = document.createElement("table");
+    table.setAttribute("id", "checktable");
+    table.style.width = '100%';
+    var tBody = document.createElement("tbody");
+    var tr;
     for(var i = 0; i< parsedString.name.length; i++){
         
         //initializes the "checkBoxObj" to become a checkbox + name
@@ -47,12 +51,24 @@ function makeCheckList(){
         label.className="css-label";
         label.innerHTML = parsedString.name[i];
         ////////////////////////////////////////////////////////
-        
+        if(i %3 == 0){
+            tr = document.createElement("tr");
+            tBody.append(tr);
+        }
+        var td = document.createElement("td");
+        td.append(checkBoxObj);
+        td.append(label);
+        tr.append(td);
+        if (i%3 != 0 && i+1 == parsedString.name.lengt){
+            tBody.append(tr);
+        }
         // adds the checkbox and label to the document
-        document.getElementById("checklist").append(checkBoxObj);
-        document.getElementById("checklist").append(label);
-        document.getElementById("checklist").innerHTML += "<br>";
+        //document.getElementById("checklist").append(checkBoxObj);
+        //document.getElementById("checklist").append(label);
+        //document.getElementById("checklist").innerHTML += "<br>";
     }
+    table.append(tBody);
+    document.getElementById("checklist").append(table);
 }
 
 /*
