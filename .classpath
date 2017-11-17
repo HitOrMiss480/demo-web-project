@@ -27,11 +27,8 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/commons-math3-3.6.1/commons-math3-3.6.1-javadoc.jar"/>
-	<classpathentry kind="lib" path="lib/commons-math3-3.6.1/commons-math3-3.6.1-sources.jar"/>
-	<classpathentry kind="lib" path="lib/commons-math3-3.6.1/commons-math3-3.6.1-test-sources.jar"/>
-	<classpathentry kind="lib" path="lib/commons-math3-3.6.1/commons-math3-3.6.1-tests.jar"/>
-	<classpathentry kind="lib" path="lib/commons-math3-3.6.1/commons-math3-3.6.1-tools.jar"/>
-	<classpathentry kind="lib" path="lib/commons-math3-3.6.1/commons-math3-3.6.1.jar"/>
+	<classpathentry kind="lib" path="lib/gson-2.8.2.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-core-2.9.2.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.44-bin.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

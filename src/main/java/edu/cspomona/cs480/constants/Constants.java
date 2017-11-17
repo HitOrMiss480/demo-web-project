@@ -1,8 +1,12 @@
 package edu.cspomona.cs480.constants;
 
 public class Constants {
-	final String UserNotFound = "UserNotFound";
-	final String UserDublicate = "UserAlreadyExists";
+	public static String FailedCreateUser = "FailedToCreateUser";
+	public static String UserNotFound = "UserNotFound";
+	public static String UserDublicate = "UserAlreadyExists";
+	public static String UserInvalid = "UserIsInvalid";
+	
+	public static String UserIdInvalid = "UserIDisInvalid";
 		
-	final String EventNotFound = "EventNotFound";
+	public static String EventNotFound = "EventNotFound";
 }

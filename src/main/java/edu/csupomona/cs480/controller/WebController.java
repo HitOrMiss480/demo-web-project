@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.google.common.base.Splitter;
+/**
 import org.apache.commons.math3.random.GaussianRandomGenerator;
 import org.apache.commons.math3.random.JDKRandomGenerator;
 import org.apache.commons.math3.random.RandomGenerator;
@@ -12,6 +13,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+**/
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,7 +49,8 @@ public class WebController {
 	 */
 	@Autowired
 	private UserManager userManager;
-
+	
+/** Unusable temporarily. To fix, import jsoup and math commons library in pom.xml
 	@RequestMapping(value = "/cs480/abcdefg", method = RequestMethod.GET)
 	String abcdefg() throws IOException {
 		// You can replace this with other string,
@@ -77,7 +80,7 @@ public class WebController {
 		return out;
 	}
 		
-
+*/
 /*	@RequestMapping(value = "/cs480/dcba", method = RequestMethod.GET)
 	String dcba() {
 		String str = "a,,b,     c,,,d";
@@ -148,7 +151,6 @@ public class WebController {
 			@RequestParam(value = "major", required = false) String major) {
 		User user = new User();
 		user.setId(id);
-		user.setMajor(major);
 		user.setName(name);
 		userManager.updateUser(user);
 		return user;
