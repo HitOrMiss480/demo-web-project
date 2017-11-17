@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Theme Made By www.w3schools.com - No Copyright -->
+	<title>CPP Calendar</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-client_id" content="567625698601-1tm35nqtjfp2hn2mpav51po9kl9loq90.apps.googleusercontent.com">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Checklist CSS -->
+    <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="home-style.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+
+    <!-- jQuery/Bootstrap/Google js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+	
+</head>
+
+<body id="home" data-spy="scroll" data-target=".navbar" data-offset="50" onload="makeCheckList();">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#home">CPP Calendar</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#login">LOG IN</a></li>
+        <li><a href="#add">ADD</a></li>
+        <li><a href="#events">EVENTS</a></li>
+        <li><a href="#about">ABOUT</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+<!-- Container (ADD Section) -->
+<div id="add" class="text-center">
+  <div class="container">
+    <h3 class="text-center">ADD</h3>
+	    <p class="text-center">
+	    	<div id="checklist"></div>
+          <button type="button" onclick="makeCheckList()">Default</button>
+          <button type="button" onclick="submitButtonPress()">Submit</button>
+	   </p>
+  </div>
+</div>
+
+  
+<footer class="text-center">
+  <a class="up-arrow" href="#myPage" data-toggle="tooltip" title="TO TOP">
+    <span class="glyphicon glyphicon-chevron-up"></span>
+  </a><br><br>
+  <p>&copy; Hit or Miss 2017</a></p> 
+</footer>
+
+<script src="homepage.js"></script>
+<script src="checklistScript.js"></script>
+
+</body>
+</html>
