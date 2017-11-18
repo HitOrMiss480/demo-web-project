@@ -1,5 +1,5 @@
-package edu.cspomona.cs480.helpers;
-import edu.cspomona.cs480.constants.*;
+package edu.csupomona.cs480.helpers;
+import edu.csupomona.cs480.constants.*;
 
 public class ExceptionHandler {
 	public ErrorPackage Handler(Exception e) {
