@@ -124,3 +124,13 @@ BEGIN
 
 END//
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE GetUserEvents(uId varchar(256))
+BEGIN
+	SELECT e.EventId, e.EventName, e.Date, e.Planner
+    FROM `Events` AS e JOIN `UserEvents` AS ue
+    ON ue.EventId = e.EventId
+    WHERE UserId = uId;
+END;
+DELIMITER ;

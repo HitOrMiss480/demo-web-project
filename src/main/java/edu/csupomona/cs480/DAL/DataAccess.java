@@ -86,7 +86,7 @@ public class DataAccess {
 				event.setEventId(rs.getString("EventId"));
 				event.setEventName(rs.getString("EventName"));
 				event.setDate(rs.getString("Date"));
-				event.setPlanner(rs.getString("Org"));
+				event.setPlanner(rs.getString("Planner"));
 				events.add(event);
 			}
 			return events;
@@ -118,7 +118,7 @@ public class DataAccess {
 				event.setEventId(rs.getString("EventId"));
 				event.setEventName(rs.getString("EventName"));
 				event.setDate(rs.getString("Date"));
-				event.setPlanner(rs.getString("Org"));
+				event.setPlanner(rs.getString("Planner"));
 				events.add(event);
 			}
 			return events;
