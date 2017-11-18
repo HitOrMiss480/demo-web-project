@@ -1,4 +1,4 @@
-package edu.cspomona.cs480.DAL;
+package edu.csupomona.cs480.DAL;
 
 import java.sql.*;
 import java.util.Properties;
