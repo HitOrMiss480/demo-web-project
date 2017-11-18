@@ -175,15 +175,9 @@ public class WebController {
 		return "Hello World";
 	}	
 	
-	@RequestMapping("/")
-	public class UserRestController {
-
-	    @RequestMapping(
-	            value = "user",
-	            method = RequestMethod.GET)
-	    public Principal user(Principal user) {
-	        return user;
-	    }
+	@RequestMapping(value = "user", method = RequestMethod.GET)
+	public Principal user(Principal user) {
+	    return user;
 	}
 	
 	/**

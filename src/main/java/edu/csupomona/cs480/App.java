@@ -22,7 +22,7 @@ import edu.csupomona.cs480.data.provider.FSUserManager;
 import edu.csupomona.cs480.data.provider.UserManager;
 
 @SpringBootApplication
-@EnableOAuth2Sso
+@EnableOAuth2Sso //annotation needed for Spring OAuth2
 public class App {
 
     /**
