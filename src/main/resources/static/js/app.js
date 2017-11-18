@@ -1,6 +1,6 @@
 'use strict';
 
-// Creating angular Application with module name "Google OAuth2"
+// Creating angular Application with module name "GoogleOAuth"
 var app = angular.module('GoogleOAuth2',[]);
 
 app.config(['$httpProvider', function ($httpProvider) {

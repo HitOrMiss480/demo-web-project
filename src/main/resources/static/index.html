@@ -15,13 +15,13 @@
             <div class="panel-heading">Google login with OAuth2</div>
             <div class="panel-body">
                 <div class="col-md-12">
-                    <a class="btn btn-default" href="https://www.google.com/accounts/Login">Google Login</a>
+                    <a class="btn btn-default" href="/google/login">Google Login</a>
                 </div>
             </div>
         </div>
         <!-- End Login panel -->
 
-        <!-- Home panel.It will visible after successful login -->
+        <!-- Home panel.It will visible after successfull login -->
         <div class="panel panel-default" ng-show="user">
             <div class="panel-heading">
                 <img class="p-img" alt="" ng-src="{{user.userAuthentication.details.picture}}"> Name: {{user.name}}

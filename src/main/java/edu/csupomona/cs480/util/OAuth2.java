@@ -19,24 +19,22 @@ import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 @Configurable
 @EnableWebSecurity
 public class OAuth2 extends WebSecurityConfigurerAdapter {
-	@Autowired
+	
     private OAuth2ClientContext oauth2ClientContext;
-	@Autowired
     private AuthorizationCodeResourceDetails authorizationCodeResourceDetails;
-	@Autowired
     private ResourceServerProperties resourceServerProperties;
 
-    
+    @Autowired
     public void setOauth2ClientContext(OAuth2ClientContext oauth2ClientContext) {
         this.oauth2ClientContext = oauth2ClientContext;
     }
 
-    
+    @Autowired
     public void setAuthorizationCodeResourceDetails(AuthorizationCodeResourceDetails authorizationCodeResourceDetails) {
         this.authorizationCodeResourceDetails = authorizationCodeResourceDetails;
     }
 
- 
+    @Autowired
     public void setResourceServerProperties(ResourceServerProperties resourceServerProperties) {
         this.resourceServerProperties = resourceServerProperties;
     }
