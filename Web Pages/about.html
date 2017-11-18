@@ -12,9 +12,9 @@
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Checklist CSS -->
-    <link href="style.css" rel="stylesheet">
+    <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="home-style.css">
+    <link rel="stylesheet" type="text/css" href="about.css">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
@@ -54,9 +54,10 @@
 
 <!-- Container (ABOUT Section) -->
 <div id="about" class="container text-center">
-  <h3>ABOUT HIT OR MISS</h3>
-  <p><a href="https://github.com/HitOrMiss480/demo-web-project">Project Source Code</a></p>
-  <br>
+  <h3>ABOUT</h3>
+  <div class="rainbow"><a data-animation="ripple" onclick="goToGithub()">Source Code</a></div>
+  <br><br>
+  <h3>DEVELOPERS</h3>
   <p>[Click pictures to expand]</p>
   <br>
   <div class="row">
@@ -127,11 +128,13 @@
   <a class="up-arrow" href="#home" data-toggle="tooltip" title="TO TOP">
     <span class="glyphicon glyphicon-chevron-up"></span>
   </a><br><br>
-  <p>&copy; Hit or Miss 2017 | <a href="https://www.w3schools.com" data-toggle="tooltip" title="Visit w3schools">Theme Design</a></p> 
+  <p>&copy; Hit or Miss 2017 <br> 
+    <a href="https://www.w3schools.com" data-toggle="tooltip">Theme Design</a></p> 
 </footer>
 
 <script src="homepage.js"></script>
 <script src="checklistScript.js"></script>
+<script src="about.js"></script>
 
 </body>
 </html>
