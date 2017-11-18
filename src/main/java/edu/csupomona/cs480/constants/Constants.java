@@ -1,4 +1,4 @@
-package edu.cspomona.cs480.constants;
+package edu.csupomona.cs480.constants;
 
 public class Constants {
 	public static String FailedCreateUser = "FailedToCreateUser";

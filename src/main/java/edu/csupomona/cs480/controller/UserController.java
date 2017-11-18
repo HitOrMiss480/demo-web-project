@@ -30,8 +30,8 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.csupomona.cs480.App;
 import edu.csupomona.cs480.data.User;
 import edu.csupomona.cs480.data.provider.UserManager;
-import edu.cspomona.cs480.DAL.DataAccess;
-import edu.cspomona.cs480.constants.*;
+import edu.csupomona.cs480.DAL.DataAccess;
+import edu.csupomona.cs480.constants.*;
 
 @RestController
 public class UserController<T> {
