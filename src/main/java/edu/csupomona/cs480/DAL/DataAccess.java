@@ -1,9 +1,11 @@
 package edu.csupomona.cs480.DAL;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Properties;
 
-import edu.csupomona.cs480.data.User;
+import edu.csupomona.cs480.data.*;
 
 
 public class DataAccess {
@@ -64,6 +66,99 @@ public class DataAccess {
 			throw e;
 		}
 	}
+	
+	// event
+	public ArrayList<Events> getUserEvents(String userId) throws SQLException{
+		CallableStatement stmt = null;
+		Connection con = getConnection();
+		try {
+			stmt = con.prepareCall("{call GetUserEvents(?)}");
+			stmt.setString(1, userId);
+			ArrayList<Events> events = new ArrayList<Events>();
+			Events event = new Events();
+			
+			boolean isRS = stmt.execute();
+			if(!isRS) {
+				return null;
+			}
+			ResultSet rs = stmt.getResultSet();
+			while (rs.next()) {
+				event.setEventId(rs.getString("EventId"));
+				event.setEventName(rs.getString("EventName"));
+				event.setDate(rs.getString("Date"));
+				event.setPlanner(rs.getString("Org"));
+				events.add(event);
+			}
+			return events;
+		}
+		catch (SQLException e) {
+			stmt.close();
+			throw e;
+		}
+		finally {
+			stmt.close();
+		}
+	}
+	
+	public ArrayList<Events> getEvents() throws SQLException{
+		CallableStatement stmt = null;
+		Connection con = getConnection();
+		try {
+			stmt = con.prepareCall("{call GetEvents()}");
+			
+			ArrayList<Events> events = new ArrayList<Events>();
+			Events event = new Events();
+			
+			boolean isRS = stmt.execute();
+			if(!isRS) {
+				return null;
+			}
+			ResultSet rs = stmt.getResultSet();
+			while (rs.next()) {
+				event.setEventId(rs.getString("EventId"));
+				event.setEventName(rs.getString("EventName"));
+				event.setDate(rs.getString("Date"));
+				event.setPlanner(rs.getString("Org"));
+				events.add(event);
+			}
+			return events;
+		}
+		catch (SQLException e) {
+			stmt.close();
+			throw e;
+		}
+		finally {
+			stmt.close();
+		}
+	}
+	
+	public ArrayList<Events> addEvents(ArrayList<Events> events) throws SQLException{
+		CallableStatement stmt = null;
+		Connection con = getConnection();
+		try {
+			for(Iterator<Events> i = events.iterator(); i.hasNext();) {
+				Events event = i.next();
+				stmt = con.prepareCall("{call CreateUser(?,?,?,?,?)}");
+				stmt.setString(1, event.getEventId());
+				stmt.setString(2, event.getEventName());
+				stmt.setString(3, event.getDate());
+				stmt.setString(4, event.getPlanner());
+				stmt.setString(5, event.getOrg().getOrgName());
+				int rs = stmt.executeUpdate();
+				if(rs == 0) {
+					return null;
+				}
+			}
+			return events;
+		}
+		catch (SQLException e) {
+			stmt.close();
+			throw e;
+		}
+	}
+	
+	//org
+	
 	
 	private  Connection getConnection() throws SQLException{
 		java.sql.Connection con = null;
