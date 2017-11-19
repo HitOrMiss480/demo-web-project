@@ -95,7 +95,7 @@ Combines all functions so that when submit button is pressed it does all the thi
 */
 function submitButtonPress(){
     sendJSONStringToServer();    
-    //location.href = 'https://www.google.com';
+    location.href = 'home.html';
 }
 
 

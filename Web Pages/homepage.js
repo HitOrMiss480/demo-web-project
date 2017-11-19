@@ -32,4 +32,6 @@ $(document).ready(function(){
   });
 
 
-
+function goToNextPage(){
+    
+}
