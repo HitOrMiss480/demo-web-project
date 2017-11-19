@@ -14,61 +14,46 @@ Accepts a JSON string and turns that into a checklist that consists of clubs and
     - this implements the "style.css" so include it in the HTML file
 */
 function makeCheckList(){
-    //------------edit when server connection is up-------------//
-    //placeholder JSON string and object    
-    var jsonText = '{"name":["club","cal","one","2","3","4","5","6","7","8","9","0"], "check":[true, false, false, false, false, false, false, false, false, false, false, false]}';
-    //---------------------------------------------------------//
+    var jsonString = 
+        '[{"orgId":"id1", "orgName":"cluasdfasdfasdfasdfasdfasdb1","check":true},{"orgId":"id2","orgName":"club2","check":false},{"orgId":"id3","orgName":"club3","check":false},{"orgId":"id4", "orgName":"asd","check":true},{"orgId":"id5","orgName":"club2","check":false},{"orgId":"id6","orgName":"club3","check":false},{"orgId":"id7", "orgName":"cluasdfasdfasdfasdfasdfasdb1","check":true},{"orgId":"id8","orgName":"club2","check":false},{"orgId":"id9","orgName":"club3","check":false}]';
     
+    document.getElementById("checklist").innerHTML ="";
+    var jsonObj = JSON.parse(jsonString);
     
-    /*
-    clears whatever is in the checklist element
-        this is in here so that there will not be multiple checkboxes of the same organization appearing on the checklist.
-        HOWEVER, if this only can be loaded once this line can be removed
-    */
-    document.getElementById("checklist").innerHTML="";
-
-    var parsedString = JSON.parse(jsonText);
     var table = document.createElement("table");
-    table.setAttribute("id", "checktable");
-    table.style.width = '100%';
-    var tBody = document.createElement("tbody");
+    table.align = "center";
+    var tbody = document.createElement("tbody");
     var tr;
-    for(var i = 0; i< parsedString.name.length; i++){
+    
+    for(var i =0; i<jsonObj.length ; i++){
+        var butt = document.createElement("input");
+        var buttTag = document.createElement("label");
         
-        //initializes the "checkBoxObj" to become a checkbox + name
-        var checkBoxObj = document.createElement("input");
-        checkBoxObj.type = "checkbox";
-        checkBoxObj.id = parsedString.name[i];
-        checkBoxObj.className="css-checkbox";
-        checkBoxObj.setAttribute("name", "organization");
-        if(parsedString.check[i])
-            checkBoxObj.setAttribute("checked", true);
+        butt.type = "checkbox";
+        butt.id = jsonObj[i].orgId;
+        butt.name = "organization";
+        butt.checked = jsonObj[i].check;
+        butt.className = "css-checkbox";
         
-        //creates a lable so the user can click to check and see what they are clicking on
-        var label = document.createElement("label");
-        label.setAttribute("for", parsedString.name[i]);
-        label.setAttribute("name", "checkbox");
-        label.className="css-label";
-        label.innerHTML = parsedString.name[i];
-        ////////////////////////////////////////////////////////
-        if(i %3 == 0){
+        buttTag.setAttribute("for" , jsonObj[i].orgId);
+        buttTag.className = "css-label";
+        buttTag.innerHTML = jsonObj[i].orgName;
+        
+        if( i%3 == 0){
             tr = document.createElement("tr");
-            tBody.append(tr);
+            tbody.append(tr);
         }
         var td = document.createElement("td");
-        td.append(checkBoxObj);
-        td.append(label);
+        td.append(butt);
+        td.append(buttTag);
         tr.append(td);
-        if (i%3 != 0 && i+1 == parsedString.name.lengt){
-            tBody.append(tr);
-        }
-        // adds the checkbox and label to the document
-        //document.getElementById("checklist").append(checkBoxObj);
-        //document.getElementById("checklist").append(label);
-        //document.getElementById("checklist").innerHTML += "<br>";
+        
+        if(i+1 == jsonObj.length && i%3 != 0)
+            tbody.append(tr);        
     }
-    table.append(tBody);
+    table.append(tbody)
     document.getElementById("checklist").append(table);
+
 }
 
 /*
@@ -86,22 +71,17 @@ function makeCheckList(){
         - this is used when the "submit" button is hit and a JSON string needs to be generated to be sent to the server       
 */
 function sendJSONStringToServer(){
-    // creates a JSON object that holds two arrays: name(string), check(boolean)
-    var sendMe = {"name":[] , "check":[]};    
-    var orgArrayList= document.getElementsByName("organization");
+    var jsonString = [];
+    var orgList = document.getElementsByName("organization");
     
-    //itterates though the for loop inputting all values into the JSON object
-    for (var i =0; i< orgArrayList.length; i++){
-        sendMe.name.push(orgArrayList[i].getAttribute("id"));
-        sendMe.check.push(orgArrayList[i].checked);
+    for(var i=0; i< orgList.length ; i++){
+        if(orgList[i].checked){
+            var orgId = orgList[i].getAttribute("id");
+            var setter = {"orgId":orgId};
+            jsonString.push(setter);            
+        }            
     }
-    /*
-        Outputs an alert to the windo of the contents of the JSON string
-        
-        -NOTE-
-        make sure to replace this with "return JSON.stringify(sendMe)" when we are on the step where we need to talk to the servers
-    */
-    window.alert(JSON.stringify(sendMe));
+    window.alert(JSON.stringify(jsonString));
 }
 
 
@@ -114,12 +94,10 @@ Combines all functions so that when submit button is pressed it does all the thi
         -- currently google.com is placed as a placeholder
 */
 function submitButtonPress(){
-    sendJSONStringToServer();
-    location.href = 'https://www.google.com';
+    sendJSONStringToServer();    
+    //location.href = 'https://www.google.com';
 }
 
-
-//
 
 $(window).ready(function(){
 $(".boton").wrapInner('<div class=botontext></div>');
@@ -130,3 +108,4 @@ $(".boton").wrapInner('<div class=botontext></div>');
     
     $(".twist").css("width", "25%").css("width", "+=3px");
 });
+
