@@ -3,10 +3,9 @@ package edu.csupomona.cs480.data;
 public class Events {
 	private String EventId;
 	private String EventName;
-	private Organizations Org;
-	private String Planner;
+	private String Org;
 	private String Date;
-	private boolean isPublic;
+	private String inPlanner;
 	
 	public String getEventId() {
 		return EventId;
@@ -20,17 +19,12 @@ public class Events {
 	public void setEventName(String eventName) {
 		EventName = eventName;
 	}
-	public Organizations getOrg() {
+
+	public String getOrg() {
 		return Org;
 	}
-	public void setOrg(Organizations org) {
+	public void setOrg(String org) {
 		Org = org;
-	}
-	public String getPlanner() {
-		return Planner;
-	}
-	public void setPlanner(String planner) {
-		Planner = planner;
 	}
 	public String getDate() {
 		return Date;
@@ -38,11 +32,11 @@ public class Events {
 	public void setDate(String date) {
 		Date = date;
 	}
-	public boolean isPublic() {
-		return isPublic;
+	public String inPlanner() {
+		return inPlanner;
 	}
-	public void setPublic(boolean isPublic) {
-		this.isPublic = isPublic;
+	public void setPlanner(String inPlanner) {
+		this.inPlanner = inPlanner;
 	}
 	
 }
