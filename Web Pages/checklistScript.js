@@ -31,7 +31,7 @@ function makeCheckList(){
         
         butt.type = "checkbox";
         butt.id = jsonObj[i].orgId;
-        butt.name = "organization";
+        butt.name = jsonObj[i].orgName;
         butt.checked = jsonObj[i].check;
         butt.className = "css-checkbox";
         
@@ -71,14 +71,18 @@ function makeCheckList(){
         - this is used when the "submit" button is hit and a JSON string needs to be generated to be sent to the server       
 */
 function sendJSONStringToServer(){
-    var jsonString = [];
-    var orgList = document.getElementsByName("organization");
+    var jsonString = {"orgIds":[]};
+    
+    var orgList = document.getElementsByTagName("input");
     
     for(var i=0; i< orgList.length ; i++){
         if(orgList[i].checked){
-            var orgId = orgList[i].getAttribute("id");
-            var setter = {"orgId":orgId};
-            jsonString.push(setter);            
+            var orgId = orgList[i].getAttribute("id");            
+            var orgName = orgList[i].name;
+            
+            var setter = {"orgId":orgId, "orgName":orgName};
+            
+            jsonString.orgIds.push(setter);
         }            
     }
     window.alert(JSON.stringify(jsonString));

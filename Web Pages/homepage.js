@@ -30,8 +30,3 @@ $(document).ready(function(){
       });
     } // End if
   });
-
-
-function goToNextPage(){
-    
-}
