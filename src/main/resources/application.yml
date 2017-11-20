@@ -31,6 +31,20 @@ security:
     resource:
       userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
       preferTokenInfo: true
+#google config
+google:
+ client:
+  access-token-uri: https://www.googleapis.com/oauth2/v3/token
+  client-authentication-scheme: query
+  client-id: 1009700773461-fc1leqha280auu2duur3f2edoluteo0v.apps.googleusercontent.com
+  client-secret: ePVBJ3JAWx10yMXT7mFuV-0S
+  redirectUri: http://localhost:8080/login/google
+  scope: profile,email, https://www.googleapis.com/auth/calendar
+  user-authorization-uri: https://acounts.google.com/o/oauth2/auth?access_type=offline&prompt=consent
+ resource:
+  prefer-token-info: 'true'
+  user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+   
 # Server configuration
 server:
  port: 8080

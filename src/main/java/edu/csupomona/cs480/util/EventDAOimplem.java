@@ -15,19 +15,19 @@ public class EventDAOimplem implements CalendarDAO
 	private JdbcTemplate jdbctemplate;
 
 	@Override
-	public void insertEvent(Event event) {
+	public void insertEvent(event event) {
 		//insert SQL code here 
 		
 	}
 
 	@Override
-	public void updateEvent(Event event) {
+	public void updateEvent(event event) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void deleteEvent(Event event) {
+	public void deleteEvent(event event) {
 		// TODO Auto-generated method stub
 		
 	}

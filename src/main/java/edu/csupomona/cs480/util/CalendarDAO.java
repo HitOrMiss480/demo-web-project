@@ -2,9 +2,9 @@ package edu.csupomona.cs480.util;
 
 public interface CalendarDAO {
 	
-	public void insertEvent(Event event);
-	public void updateEvent(Event event);
-	public void deleteEvent(Event event);
+	public void insertEvent(event event);
+	public void updateEvent(event event);
+	public void deleteEvent(event event);
 	
 
 }
