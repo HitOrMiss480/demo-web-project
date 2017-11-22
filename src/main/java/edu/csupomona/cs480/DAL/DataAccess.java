@@ -207,7 +207,7 @@ public class DataAccess {
 					event.setEventId(rs.getString("EventId"));
 					event.setEventName(rs.getString("EventName"));
 					event.setDate(rs.getString("Date"));
-					event.setPlanner(rs.getString("Planner"));
+					event.setPlanner(rs.getString("Org"));
 					events.add(event);
 				}
 			}
