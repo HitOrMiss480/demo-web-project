@@ -3,6 +3,7 @@ package edu.csupomona.cs480.DAL;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
 
 import edu.csupomona.cs480.data.*;
@@ -187,16 +188,16 @@ public class DataAccess {
 		}
 	}
 	
-	public ArrayList<Events> GetUserEventsByOrg(ArrayList<String> orgs) throws SQLException{
+	public ArrayList<Events> GetUserEventsByOrg(List<Organizations> list) throws SQLException{
 		CallableStatement stmt = null;
 		Connection con = getConnection();
 		ArrayList<Events> events = new ArrayList<Events>();
 		Events event = new Events();
 		try {
-			for(String orgId : orgs) {
+			for(Organizations orgId : list) {
 				
-				stmt = con.prepareCall("{call GetEvents(?)}");
-				stmt.setString(1, orgId);
+				stmt = con.prepareCall("{call GetUserEventsByOrg(?)}");
+				stmt.setString(1, orgId.getOrgId());
 				boolean isRS = stmt.execute();
 				if(!isRS) {
 					return null;

@@ -1,7 +1,13 @@
 package edu.csupomona.cs480.data;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Organizations {
+	@JsonProperty("OrgId")
 	private String OrgId;
+	@JsonProperty("OrgName")
 	private String OrgName;
 	
 	public String getOrgId() {

@@ -61,7 +61,7 @@ public class OAuth2 extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                // Starts authorizing configurations.
+                /*// Starts authorizing configurations.
                 .authorizeRequests()
                 // Ignore the "/" and "/index.html"
                 .antMatchers("/", "/**.html", "/**.js").permitAll()
@@ -75,9 +75,9 @@ public class OAuth2 extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 // Setting the filter for the URL "/google/login".
-                .addFilterAt(filter(), BasicAuthenticationFilter.class)
-                .csrf()
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+                .addFilterAt(filter(), BasicAuthenticationFilter.class)*/
+                .csrf().disable();
+                //.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
     }
 
     /*This method for creating filter for OAuth authentication.*/

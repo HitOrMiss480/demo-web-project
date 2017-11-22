@@ -3,21 +3,30 @@ package edu.csupomona.cs480.data;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
+
 
 /**
  * The basic user object.
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
 	/** The unique user Id */
+	@JsonProperty("id")
     private String id;
     /** The unique user Id */
+	@JsonProperty("name")
     private String name;
     /** The unique user Id */
+	@JsonProperty("userName")
     private String userName;
 
+	@JsonProperty("UserEvents")
     private ArrayList<Events> UserEvents = new ArrayList<Events>();
     
+	@JsonProperty("UserOrg")
     private ArrayList<Organizations> UserOrg = new ArrayList<Organizations>();
     
     public String getId() {

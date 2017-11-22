@@ -19,9 +19,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.*;
+import org.codehaus.jackson.map.type.TypeFactory;
 
 import edu.csupomona.cs480.App;
 import edu.csupomona.cs480.data.Events;
+import edu.csupomona.cs480.data.OrgWrapper;
+import edu.csupomona.cs480.data.Organizations;
 import edu.csupomona.cs480.data.User;
 import edu.csupomona.cs480.data.provider.UserManager;
 import edu.csupomona.cs480.DAL.DataAccess;
@@ -89,9 +94,12 @@ public class EventController {
 	}
 	
 	@RequestMapping(value = "/events/org",method = RequestMethod.POST,produces = "application/json")
-	ResponseEntity<?> getUserEventsByOrg(@RequestBody ArrayList<String> OrgIds) {
+	ResponseEntity<?> getUserEventsByOrg(@RequestBody String jsonString) {
 		try {
-			ArrayList<Events> events = eventManager.GetUserEventsByOrg(OrgIds);
+			ObjectMapper mapper = new ObjectMapper();
+			OrgWrapper Orgs = mapper.readValue(jsonString, OrgWrapper.class);
+			
+			ArrayList<Events> events = eventManager.GetUserEventsByOrg(Orgs.getIds());
 						
 			if(events.isEmpty()|| events == null) {
 				ErrorPackage error = new ErrorPackage(HttpStatus.NOT_FOUND.value(),Constants.EventNotFound);
@@ -107,3 +115,5 @@ public class EventController {
 	}
 	
 }
+
+
