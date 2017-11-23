@@ -192,7 +192,7 @@ public class DataAccess {
 		CallableStatement stmt = null;
 		Connection con = getConnection();
 		ArrayList<Events> events = new ArrayList<Events>();
-		Events event = new Events();
+		
 		try {
 			for(Organizations orgId : list) {
 				
@@ -204,10 +204,11 @@ public class DataAccess {
 				}
 				ResultSet rs = stmt.getResultSet();
 				while (rs.next()) {
+					Events event = new Events();
 					event.setEventId(rs.getString("EventId"));
 					event.setEventName(rs.getString("EventName"));
 					event.setDate(rs.getString("Date"));
-					event.setPlanner(rs.getString("Org"));
+					event.setOrg(rs.getString("Org"));
 					events.add(event);
 				}
 			}
