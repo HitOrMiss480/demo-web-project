@@ -229,7 +229,7 @@ public class DataAccess {
 		ArrayList<Organizations> orgs = new ArrayList<Organizations>();
 		
 		try {
-				stmt = con.prepareCall("{call GetUserEventsByOrg(?)}");
+				stmt = con.prepareCall("{call GetOrgs()}");
 				
 				boolean isRS = stmt.execute();
 				if(!isRS) {
