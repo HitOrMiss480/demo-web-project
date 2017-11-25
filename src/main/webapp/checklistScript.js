@@ -13,10 +13,12 @@ Accepts a JSON string and turns that into a checklist that consists of clubs and
         -make sure that i have a <p> or a <div> with the ID of "checklist"
     - this implements the "style.css" so include it in the HTML file
 */
-function makeCheckList(){
-    var jsonString = 
-        '[{"orgId":"id1", "orgName":"cluasdfasdfasdfasdfasdfasdb1","check":true},{"orgId":"id2","orgName":"club2","check":false},{"orgId":"id3","orgName":"club3","check":false},{"orgId":"id4", "orgName":"asd","check":true},{"orgId":"id5","orgName":"club2","check":false},{"orgId":"id6","orgName":"club3","check":false},{"orgId":"id7", "orgName":"cluasdfasdfasdfasdfasdfasdb1","check":true},{"orgId":"id8","orgName":"club2","check":false},{"orgId":"id9","orgName":"club3","check":false}]';
-    
+function onLoadMake(){
+    var jsonString = getAJAXString("/events/org");
+    makeCheckList(jsonString);
+}
+
+function makeCheckList(var jsonString){    
     document.getElementById("checklist").innerHTML ="";
     var jsonObj = JSON.parse(jsonString);
     
@@ -55,6 +57,17 @@ function makeCheckList(){
     document.getElementById("checklist").append(table);
 
 }
+function getAJAXString(var URLExtention){
+    var request= new XMLHttpRequest();
+    
+    var getUrl = window.location;
+    var baseUrl = getUrl.protocol + '//' + getUrl + '/' + getUrl.pathname.split('/')[1];
+    
+    baseUrl += URLExtention;
+    request.open('GET', baseUrl);
+    return request.responseText;
+}
+
 
 /*
     scans though the HTML document and collects data to send to the database in JSON format
@@ -85,7 +98,7 @@ function sendJSONStringToServer(){
             jsonString.orgIds.push(setter);
         }            
     }
-    window.alert(JSON.stringify(jsonString));
+    return JSON.stringify(jsonString);
 }
 
 
@@ -98,8 +111,17 @@ Combines all functions so that when submit button is pressed it does all the thi
         -- currently google.com is placed as a placeholder
 */
 function submitButtonPress(){
-    sendJSONStringToServer();    
-    location.href = 'home.html';
+    var sendToServer = sendJSONStringToServer();
+    var request = new XMLHttpRequest();
+    var URLExtention = "/events/org";
+    var getUrl = window.location;
+    var baseUrl = getUrl.protocol + '//' + getUrl + '/' + getUrl.pathname.split('/')[1];
+    
+    baseUrl += URLExtention;
+    request.open('POST', baseUrl);
+    
+    //input redirection here if need be
+    
 }
 
 
