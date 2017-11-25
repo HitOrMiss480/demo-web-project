@@ -1,6 +1,8 @@
 package edu.csupomona.cs480.constants;
 
 public class Constants {
+	public static String OrgsNotFound = "ORgsNotFound";
+	
 	public static String FailedCreateEvents = "FailedToCreateEvent";
 	public static String FailedCreateUser = "FailedToCreateUser";
 	public static String UserNotFound = "UserNotFound";

@@ -9,8 +9,10 @@ public class Events {
 	private String EventId;
 	@JsonProperty("EventName")
 	private String EventName;
-	@JsonProperty("Org")
-	private String Org;
+	@JsonProperty("OrgId")
+	private String OrgId;
+	@JsonProperty("OrgName")
+	private String OrgName;
 	@JsonProperty("Date")
 	private String Date;
 	@JsonProperty("inPlanner")
@@ -29,11 +31,11 @@ public class Events {
 		EventName = eventName;
 	}
 
-	public String getOrg() {
-		return Org;
+	public String getOrgId() {
+		return OrgId;
 	}
-	public void setOrg(String org) {
-		Org = org;
+	public void setOrgId(String org) {
+		OrgId = org;
 	}
 	public String getDate() {
 		return Date;
@@ -46,6 +48,12 @@ public class Events {
 	}
 	public void setPlanner(String inPlanner) {
 		this.inPlanner = inPlanner;
+	}
+	public String getOrgName() {
+		return OrgName;
+	}
+	public void setOrgName(String orgName) {
+		OrgName = orgName;
 	}
 	
 }

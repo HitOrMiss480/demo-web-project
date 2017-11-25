@@ -208,7 +208,8 @@ public class DataAccess {
 					event.setEventId(rs.getString("EventId"));
 					event.setEventName(rs.getString("EventName"));
 					event.setDate(rs.getString("Date"));
-					event.setOrg(rs.getString("Org"));
+					event.setOrgId(rs.getString("OrgId"));
+					event.setOrgName(rs.getString("OrgName"));
 					events.add(event);
 				}
 			}
@@ -222,6 +223,34 @@ public class DataAccess {
 		}
 	}
 	
+	public ArrayList<Organizations> GetOrgs() throws SQLException{
+		CallableStatement stmt = null;
+		Connection con = getConnection();
+		ArrayList<Organizations> orgs = new ArrayList<Organizations>();
+		
+		try {
+				stmt = con.prepareCall("{call GetUserEventsByOrg(?)}");
+				
+				boolean isRS = stmt.execute();
+				if(!isRS) {
+					return null;
+				}
+				ResultSet rs = stmt.getResultSet();
+				while (rs.next()) {
+					Organizations org = new Organizations();
+					org.setOrgId(rs.getString("OrgId"));
+					org.setOrgName(rs.getString("OrgName"));
+					orgs.add(org);
+				}
+			return orgs;
+		}
+		catch (SQLException e) {
+			throw e;
+		}
+		finally {
+			stmt.close();
+		}
+	}
 	
 	private  Connection getConnection() throws SQLException{
 		java.sql.Connection con = null;
