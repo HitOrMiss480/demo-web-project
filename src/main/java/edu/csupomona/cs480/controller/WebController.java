@@ -178,9 +178,9 @@ public class WebController {
 	public RedirectView googleConnectionStatus(HttpServletRequest request) throws Exception {
 		return new RedirectView(authorize());
 	}
-
+	//redirects to checklist page
 	@RequestMapping(value = "/login/google", method = RequestMethod.GET, params = "code")
-	public ModelAndView oauth2Callback(@RequestParam(value = "code") String code) {
+	public RedirectView oauth2Callback(@RequestParam(value = "code") String code) {
 		com.google.api.services.calendar.model.Events eventList;
 		String message;
 		try {
@@ -230,7 +230,7 @@ public class WebController {
 		//System.out.println("cal message:" + message);
 		//String baseUrl = String.format("%s://%s:%d/tasks/",request.getScheme(),  request.getServerName(), request.getServerPort());
 		
-		 return new ModelAndView("redirect:checklist.html");
+		 return new RedirectView("/checklist.html");
 	}
 
 	public Set<Event> getEvents() throws IOException {
