@@ -10,6 +10,9 @@ public class Organizations {
 	@JsonProperty("OrgName")
 	private String OrgName;
 	
+	@JsonProperty("check")
+	private boolean check;
+	
 	public String getOrgId() {
 		return OrgId;
 	}
@@ -21,5 +24,11 @@ public class Organizations {
 	}
 	public void setOrgName(String orgName) {
 		OrgName = orgName;
+	}
+	public boolean getCheck() {
+		return check;
+	}
+	public void setCheck(boolean check) {
+		this.check = check;
 	}
 }

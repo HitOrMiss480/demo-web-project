@@ -252,6 +252,34 @@ public class DataAccess {
 		}
 	}
 	
+	public ArrayList<Organizations> GetUserOrgs(String userId) throws SQLException{
+		CallableStatement stmt = null;
+		Connection con = getConnection();
+		ArrayList<Organizations> orgs = new ArrayList<Organizations>();
+		
+		try {
+			stmt = con.prepareCall("{call GetUserOrg(?)}");
+			stmt.setString(1, userId);
+			boolean isRS = stmt.execute();
+			if(!isRS) {
+				return null;
+			}
+			ResultSet rs = stmt.getResultSet();
+			while (rs.next()) {
+				Organizations org = new Organizations();
+				org.setOrgId(rs.getString("OrgId"));
+				org.setOrgName(rs.getString("OrgName"));
+				orgs.add(org);
+			}
+		return orgs;
+		}
+		catch (SQLException e) {
+			throw e;
+		}
+		finally {
+			stmt.close();
+		}
+	}
 	private  Connection getConnection() throws SQLException{
 		java.sql.Connection con = null;
 		Properties conProp = new Properties();

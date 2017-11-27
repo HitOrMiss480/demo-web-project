@@ -41,11 +41,38 @@ public class OrgController {
 	@Autowired
 	private DataAccess orgManager;
 	
-	@RequestMapping(value = "/org",method = RequestMethod.GET,produces = "application/json")
-	ResponseEntity<?> getUser() {
+	@RequestMapping(value = "/org/{userId}",method = RequestMethod.GET,produces = "application/json")
+	ResponseEntity<?> getOrg(@PathVariable("userId") String userId) {
 		try {
 			ArrayList<Organizations> orgs = orgManager.GetOrgs();
+			ArrayList<Organizations> userOrg = orgManager.GetUserOrgs(userId);
+			
+			for(Organizations o : orgs) {
+				for(Organizations uo : userOrg) {
+					if(o.getOrgId().equals(uo.getOrgId())) {
+						o.setCheck(true);
+					}
+				}
+			}
+			
+			if(orgs.isEmpty()|| orgs == null) {
+				ErrorPackage error = new ErrorPackage(HttpStatus.NOT_FOUND.value(),Constants.OrgsNotFound);
+				return new ResponseEntity<>(gson.toJson(error),HttpStatus.NOT_FOUND);
+			}
 						
+			return new ResponseEntity<>(gson.toJson(orgs),HttpStatus.OK);
+		}
+		catch(Exception e) {
+			// !!!!! Set up error handler here!!!!
+			return new ResponseEntity<>("!!!!add json string here!!!!!",HttpStatus.INTERNAL_SERVER_ERROR);
+		}		
+	}
+	
+	@RequestMapping(value = "/org/user",method = RequestMethod.GET,produces = "application/json")
+	ResponseEntity<?> getUserOrg(@PathVariable("userId") String userId){
+		try {
+			ArrayList<Organizations> orgs = orgManager.GetUserOrgs(userId);
+		
 			if(orgs.isEmpty()|| orgs == null) {
 				ErrorPackage error = new ErrorPackage(HttpStatus.NOT_FOUND.value(),Constants.OrgsNotFound);
 				return new ResponseEntity<>(gson.toJson(error),HttpStatus.NOT_FOUND);
