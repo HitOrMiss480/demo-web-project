@@ -14,19 +14,14 @@ Accepts a JSON string and turns that into a checklist that consists of clubs and
     - this implements the "style.css" so include it in the HTML file
 */
 function onLoadMake(){
-	var url_string = window.location;
-	var url = new URL(url_string);
-	
-	//window.alert(url_string);
-	
-	var URIExt = "/org/" + (url.searchParams.get("userId")==null? "userId=test":url.searchParams.get("userId"));
-    var jsonString = getAJAXString(URIExt);    
+    var jsonString = getAJAXString("/events/org");
+    makeCheckList(jsonString);
 }
 
-function makeCheckList(jsonString){
-	//window.alert(jsonString);
+function makeCheckList(var jsonString){    
     document.getElementById("checklist").innerHTML ="";
     var jsonObj = JSON.parse(jsonString);
+    
     var table = document.createElement("table");
     table.align = "center";
     var tbody = document.createElement("tbody");
@@ -37,14 +32,14 @@ function makeCheckList(jsonString){
         var buttTag = document.createElement("label");
         
         butt.type = "checkbox";
-        butt.id = jsonObj[i].OrgId;
-        butt.name = jsonObj[i].OrgName;
+        butt.id = jsonObj[i].orgId;
+        butt.name = jsonObj[i].orgName;
         butt.checked = jsonObj[i].check;
         butt.className = "css-checkbox";
         
-        buttTag.setAttribute("for" , jsonObj[i].OrgId);
+        buttTag.setAttribute("for" , jsonObj[i].orgId);
         buttTag.className = "css-label";
-        buttTag.innerHTML = jsonObj[i].OrgName;
+        buttTag.innerHTML = jsonObj[i].orgName;
         
         if( i%3 == 0){
             tr = document.createElement("tr");
@@ -62,16 +57,15 @@ function makeCheckList(jsonString){
     document.getElementById("checklist").append(table);
 
 }
-function getAJAXString(URLExtention){
+function getAJAXString(var URLExtention){
     var request= new XMLHttpRequest();
     
     var getUrl = window.location;
-    var baseUrl = getUrl.protocol + '//' + getUrl.host + URLExtention;
+    var baseUrl = getUrl.protocol + '//' + getUrl + '/' + getUrl.pathname.split('/')[1];
+    
+    baseUrl += URLExtention;
     request.open('GET', baseUrl);
-    request.onload = function(){
-    	makeCheckList(request.responseText);
-    }
-    request.send();
+    return request.responseText;
 }
 
 
@@ -89,8 +83,8 @@ function getAJAXString(URLExtention){
             - "{"name":[list of clubs], "check"[list of booleans that tells me if the user has previously chosen to select this option or not]}
         - this is used when the "submit" button is hit and a JSON string needs to be generated to be sent to the server       
 */
-function sendJSONStringToServer(){ 
-    var jsonString = {"Orgs":[]};
+function sendJSONStringToServer(){
+    var jsonString = {"orgIds":[]};
     
     var orgList = document.getElementsByTagName("input");
     
@@ -99,9 +93,9 @@ function sendJSONStringToServer(){
             var orgId = orgList[i].getAttribute("id");            
             var orgName = orgList[i].name;
             
-            var setter = {"OrgId":orgId, "OrgName":orgName};
+            var setter = {"orgId":orgId, "orgName":orgName};
             
-            jsonString.Orgs.push(setter);
+            jsonString.orgIds.push(setter);
         }            
     }
     return JSON.stringify(jsonString);
@@ -114,21 +108,20 @@ Combines all functions so that when submit button is pressed it does all the thi
 
 --NOTE--
     -- the website needs to be changed to the landing page
-        -- currently google.com is placed as a placeholder  
+        -- currently google.com is placed as a placeholder
 */
 function submitButtonPress(){
-	var baseURL = window.location;
-	var url = new URL(baseURL);
-	var URIExt = "/events/org/" + (url.searchParams.get("userId")==null? "userId=test":url.searchParams.get("userId"));
-	var postURL = baseURL.protocol + "//" + baseURL.host + URIExt;
-	
-	var jsonString = sendJSONStringToServer()
-	
-	var post = new XMLHttpRequest();
-	
-	post.open('POST', postURL, true);
-	post.send(jsonString);
-	
+    var sendToServer = sendJSONStringToServer();
+    var request = new XMLHttpRequest();
+    var URLExtention = "/events/org";
+    var getUrl = window.location;
+    var baseUrl = getUrl.protocol + '//' + getUrl + '/' + getUrl.pathname.split('/')[1];
+    
+    baseUrl += URLExtention;
+    request.open('POST', baseUrl);
+    
+    //input redirection here if need be
+    
 }
 
 
