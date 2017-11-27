@@ -41,7 +41,7 @@ public class OrgController {
 	@Autowired
 	private DataAccess orgManager;
 	
-	@RequestMapping(value = "/org/{userId}",method = RequestMethod.GET,produces = "application/json")
+	@RequestMapping(value = "/org/userId = {userId}",method = RequestMethod.GET,produces = "application/json")
 	ResponseEntity<?> getOrg(@PathVariable("userId") String userId) {
 		try {
 			ArrayList<Organizations> orgs = orgManager.GetOrgs();
