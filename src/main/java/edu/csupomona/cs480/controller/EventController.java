@@ -99,7 +99,7 @@ public class EventController {
 			ObjectMapper mapper = new ObjectMapper();
 			OrgWrapper Orgs = mapper.readValue(jsonString, OrgWrapper.class);
 			
-			ArrayList<Events> events = eventManager.GetUserEventsByOrg(Orgs.getIds());
+			ArrayList<Events> events = eventManager.GetUserEventsByOrg(Orgs.getIds(), userId);
 			// add google call here
 			eventManager.addUserEvents(events, userId);
 			

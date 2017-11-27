@@ -141,12 +141,9 @@ public class DataAccess {
 			stmt = con.prepareCall("{call ClearUserEvent(?)}");
 			stmt.setString(1, userId);
 			int rs = stmt.executeUpdate();
-			if(rs == 0) {
-				return null;
-			}
-			
-			for(Iterator<Events> i = events.iterator(); i.hasNext();) {
-				Events event = i.next();
+					
+			for(Events event : events) {
+		
 				stmt = con.prepareCall("{call CreateUserEvent(?,?)}");
 				stmt.setString(1, event.getEventId());
 				stmt.setString(2, userId);
@@ -188,16 +185,22 @@ public class DataAccess {
 		}
 	}
 	
-	public ArrayList<Events> GetUserEventsByOrg(List<Organizations> list) throws SQLException{
+	public ArrayList<Events> GetUserEventsByOrg(List<Organizations> list, String userId) throws SQLException{
 		CallableStatement stmt = null;
 		Connection con = getConnection();
 		ArrayList<Events> events = new ArrayList<Events>();
 		
 		try {
+			
+			stmt = con.prepareCall("{call ClearUserOrg(?)}");
+			stmt.setString(1, userId);
+			int r = stmt.executeUpdate();
+			
 			for(Organizations orgId : list) {
 				
-				stmt = con.prepareCall("{call GetUserEventsByOrg(?)}");
+				stmt = con.prepareCall("{call GetUserEventsByOrg(?,?)}");
 				stmt.setString(1, orgId.getOrgId());
+				stmt.setString(2, userId);
 				boolean isRS = stmt.execute();
 				if(!isRS) {
 					return null;
