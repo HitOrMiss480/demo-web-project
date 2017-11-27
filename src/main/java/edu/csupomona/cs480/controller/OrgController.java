@@ -46,7 +46,7 @@ public class OrgController {
 	@RequestMapping(value = "/org/userId={userId}",method = RequestMethod.GET,produces = "application/json")
 	ResponseEntity<?> getOrg(@PathVariable("userId") String userId) {
 		try {
-			Authentication var = SecurityContextHolder.getContext().getAuthentication();
+			
 			ArrayList<Organizations> orgs = orgManager.GetOrgs();
 			ArrayList<Organizations> userOrg = orgManager.GetUserOrgs(userId);
 			
