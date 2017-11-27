@@ -20,7 +20,6 @@ function onLoadMake(){
 	//window.alert(url_string);
 	
 	var URIExt = "/org/" + (url.searchParams.get("userId")==null? "userId=test":url.searchParams.get("userId"));
-	window.alert(URIExt);
     var jsonString = getAJAXString(URIExt);    
 }
 
@@ -126,11 +125,6 @@ function submitButtonPress(){
 	var jsonString = sendJSONStringToServer()
 	
 	var post = new XMLHttpRequest();
-	post.onreadystatechange = function(){
-		if(this.readyState == 4)
-			window.alert(this.responseText);
-	}
-	
 	
 	post.open('POST', postURL, true);
 	post.send(jsonString);
