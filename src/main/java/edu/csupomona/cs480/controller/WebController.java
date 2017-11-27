@@ -44,6 +44,7 @@ import com.google.api.client.auth.oauth2.TokenResponse;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets.Details;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
@@ -73,7 +74,7 @@ public class WebController {
 	private static HttpTransport httpTransport;
 	private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
 	private static com.google.api.services.calendar.Calendar client;
-
+	
 	GoogleClientSecrets clientSecrets;
 	GoogleAuthorizationCodeFlow flow;
 	Credential credential;
@@ -188,10 +189,13 @@ public class WebController {
 			System.out.println("This is the Default password>>>>>>>> " + var);
 			TokenResponse response = flow.newTokenRequest(code).setRedirectUri(redirectURI).execute();
 			System.out.println("This is the token value: >>>>>>> " + response.getAccessToken());
-			credential = flow.createAndStoreCredential(response, "userID");
+			JsonFactory j = response.getFactory();
+			
+			GoogleCredential credential = new GoogleCredential().setAccessToken(response.getAccessToken());
+			//credentialG = flow.createAndStoreCredential(response, "userID");
 			client = new com.google.api.services.calendar.Calendar.Builder(httpTransport, JSON_FACTORY, credential)
 					.setApplicationName(APPLICATION_NAME).build();
-			Events events = client.events();
+			
 			//my code to insert event
 		
 			/*Event event = new Event()
@@ -220,17 +224,21 @@ public class WebController {
 			eventList = events.list("primary").setTimeMin(date1).setTimeMax(date2).execute();
 			message = eventList.getItems().toString();
 			System.out.println("My:" + eventList.getItems());*/
+			
+			return new RedirectView("/checklist.html?token="+ response.getAccessToken());
+			
 		} catch (Exception e) {
 			logger.warn("Exception while handling OAuth2 callback (" + e.getMessage() + ")."
 					+ " Redirecting to google connection status page.");
 			message = "Exception while handling OAuth2 callback (" + e.getMessage() + ")."
 					+ " Redirecting to google connection status page.";
+			return new RedirectView("");
 		}
 
 		//System.out.println("cal message:" + message);
 		//String baseUrl = String.format("%s://%s:%d/tasks/",request.getScheme(),  request.getServerName(), request.getServerPort());
 		
-		 return new RedirectView("/checklist.html");
+		 
 	}
 
 	public Set<Event> getEvents() throws IOException {

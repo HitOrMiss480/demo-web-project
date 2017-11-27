@@ -38,7 +38,7 @@ public class UserController<T> {
 		try {
 			User user = userManager.getUser(userId);
 			
-			if(user == null) {
+			if(user.getId() == null) {
 				ErrorPackage error = new ErrorPackage(HttpStatus.NOT_FOUND.value(),Constants.UserNotFound);
 				return new ResponseEntity<>(gson.toJson(error),HttpStatus.NOT_FOUND);
 			}
