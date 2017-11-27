@@ -93,14 +93,16 @@ public class EventController {
 		}
 	}
 	
-	@RequestMapping(value = "/events/org",method = RequestMethod.POST,produces = "application/json")
-	ResponseEntity<?> getUserEventsByOrg(@RequestBody String jsonString) {
+	@RequestMapping(value = "/events/org/userId={userId}",method = RequestMethod.POST,produces = "application/json")
+	ResponseEntity<?> getUserEventsByOrg(@RequestBody String jsonString, @PathVariable("userId") String userId) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			OrgWrapper Orgs = mapper.readValue(jsonString, OrgWrapper.class);
 			
 			ArrayList<Events> events = eventManager.GetUserEventsByOrg(Orgs.getIds());
-						
+			// add google call here
+			eventManager.addUserEvents(events, userId);
+			
 			if(events.isEmpty()|| events == null) {
 				ErrorPackage error = new ErrorPackage(HttpStatus.NOT_FOUND.value(),Constants.EventNotFound);
 				return new ResponseEntity<>(gson.toJson(error),HttpStatus.NOT_FOUND);

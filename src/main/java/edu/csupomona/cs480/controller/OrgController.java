@@ -13,6 +13,8 @@ import com.google.common.base.Splitter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,9 +43,10 @@ public class OrgController {
 	@Autowired
 	private DataAccess orgManager;
 	
-	@RequestMapping(value = "/org/userId = {userId}",method = RequestMethod.GET,produces = "application/json")
+	@RequestMapping(value = "/org/userId={userId}",method = RequestMethod.GET,produces = "application/json")
 	ResponseEntity<?> getOrg(@PathVariable("userId") String userId) {
 		try {
+			Authentication var = SecurityContextHolder.getContext().getAuthentication();
 			ArrayList<Organizations> orgs = orgManager.GetOrgs();
 			ArrayList<Organizations> userOrg = orgManager.GetUserOrgs(userId);
 			
