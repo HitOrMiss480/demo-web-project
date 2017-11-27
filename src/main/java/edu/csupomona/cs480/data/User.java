@@ -2,6 +2,8 @@ package edu.csupomona.cs480.data;
 
 import java.util.Date;
 
+import org.codehaus.jackson.annotate.JsonProperty;
+
 
 /**
  * The basic user object.
@@ -9,13 +11,16 @@ import java.util.Date;
 public class User {
 
 	/** The unique user Id */
+	@JsonProperty("UserId")
     private String id;
     /** The unique user Id */
+	@JsonProperty("Name")
     private String name;
     /** The unique user Id */
-    private String major;
+	@JsonProperty("UserName")
+    private String UserName;
     /** The timestamp when the user is being created */
-    private String creationTime = new Date(System.currentTimeMillis()).toString();
+   
 
     public String getId() {
         return id;
@@ -33,19 +38,11 @@ public class User {
 		this.name = name;
 	}
 
-	public String getMajor() {
-		return major;
+	public String getUserName() {
+		return UserName;
 	}
 
-	public void setMajor(String major) {
-		this.major = major;
-	}
-
-	public String getCreationTime() {
-		return creationTime;
-	}
-
-	public void setCreationTime(String creationTime) {
-		this.creationTime = creationTime;
+	public void setUserName(String userName) {
+		UserName = userName;
 	}
 }

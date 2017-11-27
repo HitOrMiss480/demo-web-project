@@ -102,10 +102,7 @@ public class WebController {
 	 * In our project, all the beans are defined in
 	 * the {@link App} class.
 	 */
-	@Autowired
-	private UserManager userManager;
-	@Autowired
-	private GpsProductManager gpsProductManager;
+
 
 	/**
 	 * This is a simple example of how the HTTP API works.
@@ -131,12 +128,7 @@ public class WebController {
 	 * <p>
 	 * Try it in your web browser:
 	 * 	http://localhost:8080/cs480/user/user101
-	 */
-	@RequestMapping(value = "/cs480/user/{userId}", method = RequestMethod.GET)
-	User getUser(@PathVariable("userId") String userId) {
-		User user = userManager.getUser(userId);
-		return user;
-	}
+
 
 	/**
 	 * This is an example of sending an HTTP POST request to
@@ -156,57 +148,26 @@ public class WebController {
 	 * @param major
 	 * @return
 	 */
-	@RequestMapping(value = "/cs480/user/{userId}", method = RequestMethod.POST)
-	User updateUser(
-			@PathVariable("userId") String id,
-			@RequestParam("name") String name,
-			@RequestParam(value = "major", required = false) String major) {
-		User user = new User();
-		user.setId(id);
-		user.setMajor(major);
-		user.setName(name);
-		userManager.updateUser(user);
-		return user;
-	}
+
 
 	/**
 	 * This API deletes the user. It uses HTTP DELETE method.
 	 *
 	 * @param userId
 	 */
-	@RequestMapping(value = "/cs480/user/{userId}", method = RequestMethod.DELETE)
-	void deleteUser(
-			@PathVariable("userId") String userId) {
-		userManager.deleteUser(userId);
-	}
 
 	/**
 	 * This API lists all the users in the current database.
 	 *
 	 * @return
 	 */
-	@RequestMapping(value = "/cs480/users/list", method = RequestMethod.GET)
-	List<User> listAllUsers() {
-		return userManager.listAllUsers();
-	}
-	
-	@RequestMapping(value = "/cs480/gps/list", method = RequestMethod.GET)
-	List<GpsProduct> listGpsProducts() {
-		return gpsProductManager.listAllGpsProducts();
-	}
 
 	/*********** Web UI Test Utility **********/
 	/**
 	 * This method provide a simple web UI for you to test the different
 	 * functionalities used in this web service.
 	 */
-	@RequestMapping(value = "/cs480/home", method = RequestMethod.GET)
-	ModelAndView getUserHomepage() {
-		ModelAndView modelAndView = new ModelAndView("home");
-		modelAndView.addObject("users", listAllUsers());
-		return modelAndView;
-	}
-	
+
 	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public Principal sayHello(Principal principal) {
 			return principal;
@@ -219,7 +180,7 @@ public class WebController {
 	}
 
 	@RequestMapping(value = "/login/google", method = RequestMethod.GET, params = "code")
-	public ResponseEntity<String> oauth2Callback(@RequestParam(value = "code") String code) {
+	public ModelAndView oauth2Callback(@RequestParam(value = "code") String code) {
 		com.google.api.services.calendar.model.Events eventList;
 		String message;
 		try {
@@ -232,12 +193,8 @@ public class WebController {
 					.setApplicationName(APPLICATION_NAME).build();
 			Events events = client.events();
 			//my code to insert event
-/*			event E1 = new event("2017-11-26T16:30:00-08:00", "2017-11-16T18:30:00-08:00", "This is my first event description",
-					"CSS meeting", "5",
-					"Building 8, Room 345", "CSS", "css@gmail.com");
-			
-			*/
-			Event event = new Event()
+		
+			/*Event event = new Event()
 				    .setSummary("CSS Meeting")
 				    .setLocation("Building 8, Room 345")
 				    .setDescription("A chance to hear more about Google's developer products.")
@@ -255,14 +212,14 @@ public class WebController {
 			event.setEnd(end);
 			
 
-			/*Event E11 = E1.makeEvent();*/
+			
 			event = client.events().insert("primary", event).execute();
 			
 			
 			
 			eventList = events.list("primary").setTimeMin(date1).setTimeMax(date2).execute();
 			message = eventList.getItems().toString();
-			System.out.println("My:" + eventList.getItems());
+			System.out.println("My:" + eventList.getItems());*/
 		} catch (Exception e) {
 			logger.warn("Exception while handling OAuth2 callback (" + e.getMessage() + ")."
 					+ " Redirecting to google connection status page.");
@@ -270,8 +227,10 @@ public class WebController {
 					+ " Redirecting to google connection status page.";
 		}
 
-		System.out.println("cal message:" + message);
-		return new ResponseEntity<>(message, HttpStatus.OK);
+		//System.out.println("cal message:" + message);
+		//String baseUrl = String.format("%s://%s:%d/tasks/",request.getScheme(),  request.getServerName(), request.getServerPort());
+		
+		 return new ModelAndView("redirect:checklist.html");
 	}
 
 	public Set<Event> getEvents() throws IOException {

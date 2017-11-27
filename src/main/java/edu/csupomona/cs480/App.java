@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-import edu.csupomona.cs480.data.provider.EBayGpsProductManager;
+import edu.csupomona.cs480.DAL.DataAccess;
 import edu.csupomona.cs480.data.provider.FSUserManager;
 import edu.csupomona.cs480.data.provider.GpsProductManager;
 import edu.csupomona.cs480.data.provider.UserManager;
@@ -25,16 +25,24 @@ public class App {
      * annotation is applied.
      */
     @Bean
-    public UserManager userManager() {
-        UserManager userManager = new FSUserManager();
+    public DataAccess userManager() {
+    	DataAccess userManager = new DataAccess();
         return userManager;
     }
     
     @Bean
-    public GpsProductManager gpsProductManager() {
-    	GpsProductManager gpsManager = new EBayGpsProductManager();
-        return gpsManager;
+    public DataAccess eventManager() {
+    	DataAccess eventManage = new DataAccess();
+        return eventManage;
     }
+    
+    @Bean
+    public DataAccess orgManager() {
+    	DataAccess orgManager = new DataAccess();
+        return orgManager;
+    }
+    
+    
 
     /**
      * This is the running main method for the web application.

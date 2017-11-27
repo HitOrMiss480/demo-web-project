@@ -1,13 +1,12 @@
 package edu.csupomona.cs480.controller;
 
 
-import java.io.IOException;
 import java.util.*;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import com.google.common.base.Splitter;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,19 +15,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.map.*;
-import org.codehaus.jackson.map.type.TypeFactory;
 
-import edu.csupomona.cs480.App;
+import org.codehaus.jackson.map.*;
+
 import edu.csupomona.cs480.data.Events;
 import edu.csupomona.cs480.data.OrgWrapper;
-import edu.csupomona.cs480.data.Organizations;
-import edu.csupomona.cs480.data.User;
-import edu.csupomona.cs480.data.provider.UserManager;
+
 import edu.csupomona.cs480.DAL.DataAccess;
 import edu.csupomona.cs480.constants.*;
 

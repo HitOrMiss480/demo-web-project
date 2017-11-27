@@ -13,35 +13,38 @@ Accepts a JSON string and turns that into a checklist that consists of clubs and
         -make sure that i have a <p> or a <div> with the ID of "checklist"
     - this implements the "style.css" so include it in the HTML file
 */
-function onLoadMake(){
-    var jsonString = getAJAXString("/events/org");
-    makeCheckList(jsonString);
+function onLoadMake() {
+    var url_string = window.location;
+    var url = new URL(url_string);
+
+    var URIExt = "/org/" + (url.searchParams.get("userId") == null ? "userId=test" : url.searchParams.get("userId"));
+    var jsonString = getAJAXString(URIExt);
 }
 
-function makeCheckList(var jsonString){    
-    document.getElementById("checklist").innerHTML ="";
+function makeCheckList(jsonString) {
+    //window.alert(jsonString);
+    document.getElementById("checklist").innerHTML = "";
     var jsonObj = JSON.parse(jsonString);
-    
     var table = document.createElement("table");
     table.align = "center";
     var tbody = document.createElement("tbody");
     var tr;
-    
-    for(var i =0; i<jsonObj.length ; i++){
+
+    for (var i = 0; i < jsonObj.length; i++) {
         var butt = document.createElement("input");
         var buttTag = document.createElement("label");
-        
+
         butt.type = "checkbox";
-        butt.id = jsonObj[i].orgId;
-        butt.name = jsonObj[i].orgName;
+        butt.id = jsonObj[i].OrgId;
+        butt.name = jsonObj[i].OrgName;
         butt.checked = jsonObj[i].check;
         butt.className = "css-checkbox";
-        
-        buttTag.setAttribute("for" , jsonObj[i].orgId);
+
+        buttTag.setAttribute("for", jsonObj[i].OrgId);
         buttTag.className = "css-label";
-        buttTag.innerHTML = jsonObj[i].orgName;
-        
-        if( i%3 == 0){
+        buttTag.innerHTML = jsonObj[i].OrgName;
+
+        if (i % 3 == 0) {
             tr = document.createElement("tr");
             tbody.append(tr);
         }
@@ -49,23 +52,24 @@ function makeCheckList(var jsonString){
         td.append(butt);
         td.append(buttTag);
         tr.append(td);
-        
-        if(i+1 == jsonObj.length && i%3 != 0)
-            tbody.append(tr);        
+
+        if (i + 1 == jsonObj.length && i % 3 != 0)
+            tbody.append(tr);
     }
     table.append(tbody)
     document.getElementById("checklist").append(table);
 
 }
-function getAJAXString(var URLExtention){
-    var request= new XMLHttpRequest();
-    
+function getAJAXString(URLExtention) {
+    var request = new XMLHttpRequest();
+
     var getUrl = window.location;
-    var baseUrl = getUrl.protocol + '//' + getUrl + '/' + getUrl.pathname.split('/')[1];
-    
-    baseUrl += URLExtention;
+    var baseUrl = getUrl.protocol + '//' + getUrl.host + URLExtention;
     request.open('GET', baseUrl);
-    return request.responseText;
+    request.onload = function () {
+        makeCheckList(request.responseText);
+    }
+    request.send();
 }
 
 
@@ -83,20 +87,20 @@ function getAJAXString(var URLExtention){
             - "{"name":[list of clubs], "check"[list of booleans that tells me if the user has previously chosen to select this option or not]}
         - this is used when the "submit" button is hit and a JSON string needs to be generated to be sent to the server       
 */
-function sendJSONStringToServer(){
-    var jsonString = {"orgIds":[]};
-    
+function sendJSONStringToServer() {
+    var jsonString = { "Orgs": [] };
+
     var orgList = document.getElementsByTagName("input");
-    
-    for(var i=0; i< orgList.length ; i++){
-        if(orgList[i].checked){
-            var orgId = orgList[i].getAttribute("id");            
+
+    for (var i = 0; i < orgList.length; i++) {
+        if (orgList[i].checked) {
+            var orgId = orgList[i].getAttribute("id");
             var orgName = orgList[i].name;
-            
-            var setter = {"orgId":orgId, "orgName":orgName};
-            
-            jsonString.orgIds.push(setter);
-        }            
+
+            var setter = { "OrgId": orgId, "OrgName": orgName };
+
+            jsonString.Orgs.push(setter);
+        }
     }
     return JSON.stringify(jsonString);
 }
@@ -108,30 +112,31 @@ Combines all functions so that when submit button is pressed it does all the thi
 
 --NOTE--
     -- the website needs to be changed to the landing page
-        -- currently google.com is placed as a placeholder
+        -- currently google.com is placed as a placeholder  
 */
-function submitButtonPress(){
-    var sendToServer = sendJSONStringToServer();
-    var request = new XMLHttpRequest();
-    var URLExtention = "/events/org";
-    var getUrl = window.location;
-    var baseUrl = getUrl.protocol + '//' + getUrl + '/' + getUrl.pathname.split('/')[1];
-    
-    baseUrl += URLExtention;
-    request.open('POST', baseUrl);
-    
-    //input redirection here if need be
-    
+function submitButtonPress() {
+    var baseURL = window.location;
+    var url = new URL(baseURL);
+    var URIExt = "/events/org/" + (url.searchParams.get("userId") == null ? "userId=test" : url.searchParams.get("userId"));
+    var postURL = baseURL.protocol + "//" + baseURL.host + URIExt;
+
+    var jsonString = sendJSONStringToServer()
+
+    var post = new XMLHttpRequest();
+
+    post.open('POST', postURL, true);
+    post.send(jsonString);
+
 }
 
 
-$(window).ready(function(){
-$(".boton").wrapInner('<div class=botontext></div>');
-    
-    $(".botontext").clone().appendTo( $(".boton") );
-    
+$(window).ready(function () {
+    $(".boton").wrapInner('<div class=botontext></div>');
+
+    $(".botontext").clone().appendTo($(".boton"));
+
     $(".boton").append('<span class="twist"></span><span class="twist"></span><span class="twist"></span><span class="twist"></span>');
-    
+
     $(".twist").css("width", "25%").css("width", "+=3px");
 });
 
