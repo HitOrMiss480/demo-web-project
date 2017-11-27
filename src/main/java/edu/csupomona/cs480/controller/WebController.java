@@ -69,11 +69,11 @@ import com.google.api.services.calendar.Calendar;
 @RestController
 public class WebController {
 
-	private final static Log logger = LogFactory.getLog(App.class);
-	private static final String APPLICATION_NAME = "";
-	private static HttpTransport httpTransport;
-	private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
-	private static com.google.api.services.calendar.Calendar client;
+	public final static Log logger = LogFactory.getLog(App.class);
+	public static final String APPLICATION_NAME = "";
+	public static HttpTransport httpTransport;
+	public static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
+	public static com.google.api.services.calendar.Calendar client;
 	
 	GoogleClientSecrets clientSecrets;
 	GoogleAuthorizationCodeFlow flow;

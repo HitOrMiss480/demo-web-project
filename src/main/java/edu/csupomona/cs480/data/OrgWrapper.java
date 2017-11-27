@@ -10,11 +10,20 @@ import org.codehaus.jackson.annotate.JsonProperty;
 public class OrgWrapper {
 	@JsonProperty("Orgs")
 	private List<Organizations> Orgs;
+	@JsonProperty("token")
+	private String token;
+	
 	
 	public List<Organizations> getIds(){
 		return Orgs;
 	}
 	public void setIds(List<Organizations> ids) {
 		this.Orgs = ids;
+	}
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
 	}
 }

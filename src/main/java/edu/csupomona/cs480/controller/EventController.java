@@ -2,6 +2,7 @@ package edu.csupomona.cs480.controller;
 
 
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.*;
 
 import com.google.api.client.auth.oauth2.Credential;
@@ -9,6 +10,7 @@ import com.google.api.client.auth.oauth2.TokenResponse;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -117,12 +119,12 @@ public class EventController {
 		}
 	}
 	
-	@RequestMapping(value = "/events/org/userId={userId}&token={token}",method = RequestMethod.POST,produces = "application/json")
-	ResponseEntity<?> getUserEventsByOrg(@RequestBody String jsonString, @PathVariable("userId") String userId, @PathVariable("token") String token) {
+	@RequestMapping(value = "/events/org/userId={userId}",method = RequestMethod.POST,produces = "application/json")
+	ResponseEntity<?> getUserEventsByOrg(@RequestBody String jsonString, @PathVariable("userId") String userId) {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			OrgWrapper Orgs = mapper.readValue(jsonString, OrgWrapper.class);
-			
+			String token = Orgs.getToken();
 			ArrayList<Events> events = eventManager.GetUserEventsByOrg(Orgs.getIds(), userId);
 			// add google call here
 			createGoogleEvent(events,token);
@@ -141,16 +143,17 @@ public class EventController {
 			return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
 		}		
 	}
-	void createGoogleEvent(ArrayList<Events> events, String token) throws IOException {
+	void createGoogleEvent(ArrayList<Events> events, String token) throws IOException, GeneralSecurityException {
 		GoogleCredential credential = new GoogleCredential().setAccessToken(token);
 		//credentialG = flow.createAndStoreCredential(response, "userID");
+		httpTransport = GoogleNetHttpTransport.newTrustedTransport();
 		client = new com.google.api.services.calendar.Calendar.Builder(httpTransport, JSON_FACTORY, credential)
 				.setApplicationName(APPLICATION_NAME).build();
 		for(Events e : events) {
 			Event event = new Event()
 				    .setSummary(e.getEventName())
-				    //.setLocation("Building 8, Room 345")
-				    //.setDescription("A chance to hear more about Google's developer products.")
+				    .setLocation("test")
+				    .setDescription("test")
 				    .setColorId("5");
 			DateTime startDateTime = new DateTime(e.getDate());
 			EventDateTime start = new EventDateTime()
