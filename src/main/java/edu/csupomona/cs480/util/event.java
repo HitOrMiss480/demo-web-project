@@ -1,7 +1,7 @@
 package edu.csupomona.cs480.util;
 
 
-import edu.csupomona.cs480.rest.utils.RestUtil;
+
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.DateTime;
@@ -9,6 +9,11 @@ import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventAttachment;
 import com.google.api.services.calendar.model.EventAttendee;
 import com.google.api.services.calendar.model.EventDateTime;
+import com.google.api.services.calendar.Calendar;
+
+
+import edu.csupomona.cs480.rest.utils.RestUtil;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -62,7 +67,7 @@ public class event
 	
 	private OAuth2RestTemplate oAuth2RestTemplate;
 	//constructor
-	event(String startTime, String endTime, String descript, String summary, String color,
+	public event(String startTime, String endTime, String descript, String summary, String color,
 			String address, String orgN, String orgE)
 	{
 		startDateTime = startTime;
@@ -79,7 +84,7 @@ public class event
 	 * 
 	 * @return a valid Event
 	 */
-	   private Event makeEvent() {
+	   public Event makeEvent() {
 		   	DateTime startT = new DateTime(getStartDateTime());
 			DateTime endT = new DateTime(getEndDateTime());
 	        Event Aevent = new Event()
@@ -239,14 +244,5 @@ public class event
 	public void setoAuth2RestTemplate(OAuth2RestTemplate oAuth2RestTemplate) {
 		this.oAuth2RestTemplate = oAuth2RestTemplate;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
