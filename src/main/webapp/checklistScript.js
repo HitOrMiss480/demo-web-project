@@ -124,6 +124,12 @@ function submitButtonPress() {
 
     var post = new XMLHttpRequest();
 
+    post.onreadystatechange = function(){
+    	if(this.readyState == 4){
+    		window.location.replace(baseURL.protocol + "//" + baseURL.host);
+    		
+    	}
+    }
     post.open('POST', postURL, true);
     post.send(jsonString);
 
