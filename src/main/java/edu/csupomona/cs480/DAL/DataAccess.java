@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
+import java.util.UUID;
 
 import edu.csupomona.cs480.data.*;
 
@@ -26,15 +27,24 @@ public class DataAccess {
 			User user  = new User();
 			
 			boolean isRS = stmt.execute();
-			if(!isRS) {
-				return null;
-			}
+			 
+            if(!isRS) {
+            	return null;
+            }
 			ResultSet rs = stmt.getResultSet();
-			while (rs.next()) {
+			while(!rs.next()) {
+				user.setId(UUID.randomUUID().toString());
+				user.setUserName(userId);
+				user.setName(userId);
+				createUser(user);
+				return user;
+			}
+			while(rs.next()) {
 				user.setId(rs.getString("UserId"));
 				user.setName(rs.getString("Name"));
 				user.setUserName(rs.getString("UserName"));
 			}
+			
 			// add get userevent and userorg code here
 			
 			return user;

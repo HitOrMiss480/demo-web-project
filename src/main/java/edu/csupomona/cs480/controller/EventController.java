@@ -36,6 +36,7 @@ import org.codehaus.jackson.map.*;
 
 import edu.csupomona.cs480.data.Events;
 import edu.csupomona.cs480.data.OrgWrapper;
+import edu.csupomona.cs480.data.User;
 import edu.csupomona.cs480.App;
 import edu.csupomona.cs480.DAL.DataAccess;
 import edu.csupomona.cs480.constants.*;
@@ -124,10 +125,10 @@ public class EventController {
 		try {
 			ObjectMapper mapper = new ObjectMapper();
 			OrgWrapper Orgs = mapper.readValue(jsonString, OrgWrapper.class);
-			String token = Orgs.getToken();
+			User user = eventManager.getUser(userId);
 			ArrayList<Events> events = eventManager.GetUserEventsByOrg(Orgs.getIds(), userId);
 			// add google call here
-			createGoogleEvent(events,token);
+			createGoogleEvent(events,user.getName());
 			
 			eventManager.addUserEvents(events, userId);
 			

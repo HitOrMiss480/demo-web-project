@@ -17,7 +17,7 @@ function onLoadMake() {
     var url_string = window.location;
     var url = new URL(url_string);
 
-    var URIExt = "/org/" + (url.searchParams.get("userId") == null ? "userId=test" : url.searchParams.get("userId"));
+    var URIExt = "/org/userId=" + (url.searchParams.get("userId") == null ? "test" : url.searchParams.get("userId"));
     var jsonString = getAJAXString(URIExt);
 }
 
@@ -117,7 +117,7 @@ Combines all functions so that when submit button is pressed it does all the thi
 function submitButtonPress() {
     var baseURL = window.location;
     var url = new URL(baseURL);
-    var URIExt = "/events/org/" + (url.searchParams.get("userId") == null ? "userId=test" : url.searchParams.get("userId"));
+    var URIExt = "/events/org/userId=" + (url.searchParams.get("userId") == null ? "test" : url.searchParams.get("userId"));
     var postURL = baseURL.protocol + "//" + baseURL.host + URIExt;
 
     var jsonString = sendJSONStringToServer()

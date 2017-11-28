@@ -12,13 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import edu.csupomona.cs480.App;
+import edu.csupomona.cs480.DAL.DataAccess;
 import edu.csupomona.cs480.data.GpsProduct;
 import edu.csupomona.cs480.data.User;
 import edu.csupomona.cs480.data.provider.GpsProductManager;
 import edu.csupomona.cs480.data.provider.UserManager;
 import edu.csupomona.cs480.util.event;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
@@ -45,6 +50,7 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets.Details;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
+import com.google.api.client.googleapis.auth.oauth2.OAuth2Utils;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
@@ -69,6 +75,9 @@ import com.google.api.services.calendar.Calendar;
 @RestController
 public class WebController {
 
+	
+	
+	
 	public final static Log logger = LogFactory.getLog(App.class);
 	public static final String APPLICATION_NAME = "";
 	public static HttpTransport httpTransport;
@@ -175,19 +184,26 @@ public class WebController {
 	}
 	
 	
+	
+	
 	@RequestMapping(value = "/login/google", method = RequestMethod.GET)
 	public RedirectView googleConnectionStatus(HttpServletRequest request) throws Exception {
 		return new RedirectView(authorize());
 	}
+	
+	@Autowired
+	private DataAccess eventManager;
+	
 	//redirects to checklist page
 	@RequestMapping(value = "/login/google", method = RequestMethod.GET, params = "code")
 	public RedirectView oauth2Callback(@RequestParam(value = "code") String code) {
 		com.google.api.services.calendar.model.Events eventList;
 		String message;
 		try {
-			Object var = SecurityContextHolder.getContext().getAuthentication().getCredentials();
-			System.out.println("This is the Default password>>>>>>>> " + var);
+			////Object var = SecurityContextHolder.getContext().getAuthentication().getCredentials();
+			//System.out.println("This is the Default password>>>>>>>> " + var);
 			TokenResponse response = flow.newTokenRequest(code).setRedirectUri(redirectURI).execute();
+			
 			System.out.println("This is the token value: >>>>>>> " + response.getAccessToken());
 			JsonFactory j = response.getFactory();
 			
@@ -195,37 +211,11 @@ public class WebController {
 			//credentialG = flow.createAndStoreCredential(response, "userID");
 			client = new com.google.api.services.calendar.Calendar.Builder(httpTransport, JSON_FACTORY, credential)
 					.setApplicationName(APPLICATION_NAME).build();
-			
-			//my code to insert event
-		
-			/*Event event = new Event()
-				    .setSummary("CSS Meeting")
-				    .setLocation("Building 8, Room 345")
-				    .setDescription("A chance to hear more about Google's developer products.")
-				    .setColorId("5");
-			DateTime startDateTime = new DateTime("2017-11-26T14:30:00-08:00");
-			EventDateTime start = new EventDateTime()
-			    .setDateTime(startDateTime)
-			    .setTimeZone("America/Los_Angeles");
-			event.setStart(start);
-
-			DateTime endDateTime = new DateTime("2017-11-26T16:30:00-08:00");
-			EventDateTime end = new EventDateTime()
-			    .setDateTime(endDateTime)
-			    .setTimeZone("America/Los_Angeles");
-			event.setEnd(end);
-			
-
-			
-			event = client.events().insert("primary", event).execute();
+			   
+			User user = eventManager.getUser(response.getAccessToken());
 			
 			
-			
-			eventList = events.list("primary").setTimeMin(date1).setTimeMax(date2).execute();
-			message = eventList.getItems().toString();
-			System.out.println("My:" + eventList.getItems());*/
-			
-			return new RedirectView("/checklist.html?token="+ response.getAccessToken());
+			return new RedirectView("/checklist.html?userId="+ user.getId());
 			
 		} catch (Exception e) {
 			logger.warn("Exception while handling OAuth2 callback (" + e.getMessage() + ")."

@@ -42,7 +42,11 @@ public class App {
         return orgManager;
     }
     
-    
+    @Bean
+    public DataAccess webManager() {
+    	DataAccess webManager = new DataAccess();
+        return webManager;
+    }
 
     /**
      * This is the running main method for the web application.
