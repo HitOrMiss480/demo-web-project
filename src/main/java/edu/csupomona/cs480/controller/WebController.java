@@ -93,7 +93,7 @@ public class WebController {
 	//@Value("${google.client.client-secret}")
 	private String clientSecret = "ePVBJ3JAWx10yMXT7mFuV-0S";
 	//@Value("${google.client.redirectUri}")
-	private String redirectURI = "http://localhost:8080/login/google";
+	private String redirectURI = "http://student-schedule.com/login/google";
 
 	private Set<Event> events = new HashSet<>();
 
