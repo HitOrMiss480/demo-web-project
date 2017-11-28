@@ -133,7 +133,7 @@ function submitButtonPress() {
 
     post.onreadystatechange = function(){
     	if(this.readyState == 4){
-    		//window.location.replace(baseURL.protocol + "//" + baseURL.host);
+    		window.location.replace(baseURL.protocol + "//" + baseURL.host);
     		
     	}
     }
