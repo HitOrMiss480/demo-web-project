@@ -31,6 +31,7 @@ security:
     resource:
       userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
       preferTokenInfo: true
+      filter-order: 3
 #google config
 google:
  client:

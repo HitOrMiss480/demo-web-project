@@ -16,8 +16,11 @@ Accepts a JSON string and turns that into a checklist that consists of clubs and
 function onLoadMake() {
     var url_string = window.location;
     var url = new URL(url_string);
-
-    var URIExt = "/org/userId=" + (url.searchParams.get("userId") == null ? "test" : url.searchParams.get("userId"));
+    var ext = (window.location.href.split('?')[1] == null ? "test" : window.location.href.split('?')[1]);
+    if(ext[ext.length-1]=='#'){
+        ext = ext.substr(0,ext.length-1);
+    }
+    var URIExt = "/org/" + ext;
     var jsonString = getAJAXString(URIExt);
 }
 
@@ -117,7 +120,11 @@ Combines all functions so that when submit button is pressed it does all the thi
 function submitButtonPress() {
     var baseURL = window.location;
     var url = new URL(baseURL);
-    var URIExt = "/events/org/userId=" + (url.searchParams.get("userId") == null ? "test" : url.searchParams.get("userId"));
+    var ext = (window.location.href.split('?')[1] == null ? "test" : window.location.href.split('?')[1]);
+    if(ext[ext.length-1]=='#'){
+        ext = ext.substr(0,ext.length-1);
+    }
+    var URIExt = "/events/org/" + ext;
     var postURL = baseURL.protocol + "//" + baseURL.host + URIExt;
 
     var jsonString = sendJSONStringToServer()
@@ -126,7 +133,7 @@ function submitButtonPress() {
 
     post.onreadystatechange = function(){
     	if(this.readyState == 4){
-    		window.location.replace(baseURL.protocol + "//" + baseURL.host);
+    		//window.location.replace(baseURL.protocol + "//" + baseURL.host);
     		
     	}
     }

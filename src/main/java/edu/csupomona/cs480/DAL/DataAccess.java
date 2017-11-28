@@ -32,6 +32,12 @@ public class DataAccess {
             	return null;
             }
 			ResultSet rs = stmt.getResultSet();
+			while(rs.next()) {
+				user.setId(rs.getString("UserId"));
+				user.setName(rs.getString("Name"));
+				user.setUserName(rs.getString("UserName"));
+				return user;
+			}
 			while(!rs.next()) {
 				user.setId(UUID.randomUUID().toString());
 				user.setUserName(userId);
@@ -39,11 +45,7 @@ public class DataAccess {
 				createUser(user);
 				return user;
 			}
-			while(rs.next()) {
-				user.setId(rs.getString("UserId"));
-				user.setName(rs.getString("Name"));
-				user.setUserName(rs.getString("UserName"));
-			}
+			
 			
 			// add get userevent and userorg code here
 			
